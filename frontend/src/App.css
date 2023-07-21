@@ -52,6 +52,19 @@
   opacity: 9;
 }
 
+.brandName{
+  font-size: 30px;
+}
+
+.navContent{
+  margin-left: 40%;
+  padding: 70px;
+}
+
+.search{
+  
+  
+}
 
 .cardDescription {
   display: none;
