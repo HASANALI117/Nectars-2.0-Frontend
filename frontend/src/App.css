@@ -54,6 +54,7 @@
 
 .brandName{
   font-size: 30px;
+  color: black;
 }
 
 .navContent{
@@ -62,6 +63,7 @@
 }
 
 .search{
+  margin-right: 200px;
   
   
 }

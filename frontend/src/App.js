@@ -7,7 +7,7 @@ import Navbar from "./comonents/navbar/Navbar";
 export default function App() {
   return (
     <NextUIProvider>
-      <Navbar />
+      <Navbar brand="Brand" dropdownColor="success" />
       <ProductCard
         name="Product Name"
         desc="This product is a product of many products that are produced here."

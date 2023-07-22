@@ -1,12 +1,26 @@
+import { useState } from "react";
 import { Navbar, Text, Avatar, Dropdown, Input } from "@nextui-org/react";
 import { SearchIcon } from "./Searchicon.js";
+import { Button, Link } from "@nextui-org/react";
 
-export default function App() {
+export default function App(props) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  function handleLogin() {
+    setIsAuthenticated(true);
+  }
+
+  function handleLogout() {
+    setIsAuthenticated(false);
+  }
+
   return (
     <Navbar isBordered variant="sticky">
       <Navbar.Brand css={{ mr: "$4" }}>
         <Text b color="inherit" className="brandName">
-          Brand
+          <a className="brandName" href={props.brnadlink}>
+            {props.brand}
+          </a>
         </Text>
         <Navbar.Content variant="highlight" className="navContent">
           <Navbar.Link href="#">All</Navbar.Link>
@@ -51,29 +65,55 @@ export default function App() {
             placeholder="Search..."
           />
         </Navbar.Item>
-        <Dropdown placement="bottom-right">
-          <Navbar.Item>
-            <Dropdown.Trigger>
-              <Avatar
-                bordered
-                as="button"
-                size="md"
-                src="https://i.pravatar.cc/150"
-              />
-            </Dropdown.Trigger>
-          </Navbar.Item>
-          <Dropdown.Menu
-            aria-label="User menu actions"
-            color="secondary"
-            onAction={(actionKey) => console.log({ actionKey })}
-          >
-            <Dropdown.Item key="settings">Profile</Dropdown.Item>
-            <Dropdown.Item key="team_settings">Cart</Dropdown.Item>
-            <Dropdown.Item key="logout" withDivider color="error">
-              Log Out
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        {isAuthenticated ? (
+          <Dropdown placement="bottom-right">
+            <Navbar.Item>
+              <Dropdown.Trigger>
+                <Avatar
+                  bordered
+                  as="button"
+                  size="md"
+                  src="https://i.pravatar.cc/150"
+                />
+              </Dropdown.Trigger>
+            </Navbar.Item>
+            <Dropdown.Menu
+              aria-label="User menu actions"
+              color="secondary"
+              onAction={(actionKey) => console.log({ actionKey })}
+            >
+              <Dropdown.Item color={props.dropdownColor} key="profile">
+                Profile
+              </Dropdown.Item>
+              <Dropdown.Item color={props.dropdownColor} key="orders">
+                Orders
+              </Dropdown.Item>
+              <Dropdown.Item
+                key="logout"
+                withDivider
+                color="error"
+                onClick={handleLogout}
+              >
+                Log Out
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        ) : (
+          <Navbar.Content>
+            <Navbar.Link
+              color={props.loginColor}
+              href="#"
+              onClick={handleLogin}
+            >
+              Login
+            </Navbar.Link>
+            <Navbar.Item>
+              <Button auto flat as={Link} href="#" color={props.signupColor}>
+                Sign Up
+              </Button>
+            </Navbar.Item>
+          </Navbar.Content>
+        )}
       </Navbar.Content>
     </Navbar>
   );
