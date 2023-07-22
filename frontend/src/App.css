@@ -1,38 +1,288 @@
-.App {
-  text-align: center;
+/* Base styles */
+
+.Home {
+    background-color: #ffffff00;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    overflow-x: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Home .overlap-group-wrapper {
+    background-color: #00000000;
+    border: 1px none;
+    height: 7258px;
+    overflow: hidden;
+    /* width: 1380px; */
+    width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.Home .overlap-group {
+    height: 7258px;
+    left: -9px;
+    position: relative;
+    /* width: 1313px; */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.Home .download {
+    height: 7258px;
+    left: 9px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
 }
 
-.App-link {
-  color: #61dafb;
+.Home .text-wrapper {
+    color: #221f1fd6;
+    font-family: "Inter-BlackItalic", Helvetica;
+    font-size: 128px;
+    font-style: italic;
+    font-weight: 900;
+    left: 42px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 326px;
+    width: 1006px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Home .p {
+    color: #000000;
+    font-family: "Inter-Bold", Helvetica;
+    font-size: 32px;
+    font-weight: 700;
+    left: 69px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 898px;
+    width: 568px;
+}
+
+.Home .text-wrapper-2 {
+    color: #000000;
+    font-family: "Inter-MediumItalic", Helvetica;
+    font-size: 50px;
+    font-style: italic;
+    font-weight: 500;
+    left: 520px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 1638px;
+    width: 769px;
+}
+
+.Home .text-wrapper-3 {
+    color: #000000;
+    font-family: "Inter-LightItalic", Helvetica;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 300;
+    height: 79px;
+    left: 120px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 1380px;
+    width: 541px;
+}
+
+.Home .text-wrapper-4 {
+    color: #000000;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 40px;
+    font-weight: 400;
+    left: 278px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 2546px;
+    width: 864px;
+}
+
+.Home .rectangle {
+    background-color: #695d7d;
+    border-radius: 47px;
+    height: 371px;
+    left: 78px;
+    position: absolute;
+    top: 2694px;
+    width: 402px;
+}
+
+.Home .rectangle-2 {
+    background-color: #ffffff;
+    border-radius: 46px;
+    height: 358px;
+    left: 83px;
+    position: absolute;
+    top: 2701px;
+    width: 392px;
+}
+
+.Home .rectangle-3 {
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #000000;
+    border-radius: 46px;
+    height: 358px;
+    left: 754px;
+    position: absolute;
+    top: 2694px;
+    width: 392px;
+}
+
+.Home .text-wrapper-5 {
+    color: #5a1392;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 36px;
+    font-weight: 400;
+    left: 789px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 2738px;
+    width: 321px;
+}
+
+.Home .text-wrapper-6 {
+    color: #0c2c7d;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 36px;
+    font-weight: 400;
+    left: 119px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 2728px;
+    width: 321px;
+}
+
+.Home .text-wrapper-7 {
+    color: #ffffff83;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 64px;
+    font-weight: 400;
+    left: 586px;
+    letter-spacing: 0;
+    line-height: normal;
+    mix-blend-mode: overlay;
+    position: absolute;
+    text-align: center;
+    top: 4518px;
+    width: 727px;
+}
+
+.Home .rectangle-4 {
+    background-color: #000000;
+    height: 995px;
+    left: 0;
+    position: absolute;
+    top: 5667px;
+    width: 1298px;
+}
+
+.Home .img {
+    height: 1000px;
+    left: 9px;
+    object-fit: cover;
+    position: absolute;
+    top: 5662px;
+    width: 100%;
+}
+
+.TORCH {
+    position: absolute;
+    top: 72%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* z-index: 9999; */
+    background-color: rgba(7, 19, 43, 1);
+    padding: 20px;
+    /* border-radius: 10px; */
+    width: 100%;
+    height: 1000px;
+}
+
+.Home .text-wrapper-8 {
+    color: #f07c3b;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 64px;
+    font-weight: 500;
+    left: 86px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 4763px;
+    width: 1000px;
+}
+
+
+/* Media queries for responsiveness */
+
+@media screen and (max-width: 1280px) {
+    .Home .overlap-group-wrapper {
+        width: 100%;
+    }
+    .Home .overlap-group {
+        width: 100%;
+    }
+    .Home .download {
+        width: 100%;
+    }
+    .Home .text-wrapper,
+    .Home .p,
+    .Home .text-wrapper-2,
+    .Home .text-wrapper-3,
+    .Home .text-wrapper-4,
+    .Home .rectangle,
+    .Home .rectangle-2,
+    .Home .rectangle-3,
+    .Home .text-wrapper-5,
+    .Home .text-wrapper-6,
+    .Home .text-wrapper-7,
+    .Home .img,
+    .Home .rectangle-5,
+    .Home .text-wrapper-8 {
+        width: 100%;
+        left: 0;
+    }
+}
+
+
+/* Add more media queries as needed for different screen sizes */
+
+@media screen and (max-width: 1920px) {
+    .Home .text-wrapper {
+        font-size: 96px;
+    }
+    .Home .p {
+        font-size: 24px;
+    }
+    .Home .text-wrapper-2 {
+        font-size: 40px;
+    }
+    .Home .text-wrapper-3 {
+        font-size: 14px;
+    }
+    .Home .text-wrapper-4 {
+        font-size: 32px;
+    }
+    .Home .text-wrapper-5 {
+        font-size: 28px;
+    }
+    .Home .text-wrapper-6 {
+        font-size: 28px;
+    }
+    .Home .text-wrapper-7 {
+        font-size: 48px;
+    }
+    .Home .text-wrapper-8 {
+        font-size: 48px;
+    }
 }
