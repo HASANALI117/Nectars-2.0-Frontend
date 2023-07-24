@@ -1,8 +1,9 @@
 .productCard{
-  margin: 0 auto;
+  margin: 10%;
   margin-top: 10%;
   background-color: black;
   color: linen;
+  
 }
 
 .productTitle{
@@ -99,3 +100,26 @@
 .cardOverlay:hover .cardButton {
   display: block;
 }
+
+.signinCard{
+  max-width: 25%;
+  padding: 15px;
+  margin: 10px;
+  margin-left: 70%;
+  
+}
+.signinCardHead{
+  margin-left: 38%;
+  font-weight: bold;
+}
+
+.signinInput{
+  margin: 5px;
+}
+
+.link{
+  margin-left: 20% ;
+  margin-top: 20px ;
+  font-size: smaller;
+}
+

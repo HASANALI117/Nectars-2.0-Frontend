@@ -6,12 +6,18 @@ import Navbar from "./comonents/navbar/Navbar";
 
 export default function App() {
   return (
-    <NextUIProvider>
-      <Navbar brand="Brand" dropdownColor="success" />
+    <NextUIProvider className="conatinerall">
+      <Navbar
+        brand="Brand"
+        dropdownColor="success"
+        buttonColor="success"
+        profilePic="https://i.pravatar.cc/150"
+      />
       <ProductCard
         name="Product Name"
         desc="This product is a product of many products that are produced here."
         price="$9.99"
+        buttonColor="success"
       />
     </NextUIProvider>
   );

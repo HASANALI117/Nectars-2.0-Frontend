@@ -14,7 +14,7 @@ function ProductCard(props) {
           <Card.Title className="productTitle">{props.name}</Card.Title>
           <Card.Text className="cardDescription">{props.desc}</Card.Text>
           <Card.Subtitle className="cardPrice">{props.price}</Card.Subtitle>
-          <Button variant="danger" className="cardButton">
+          <Button variant={props.buttonColor} className="cardButton">
             Buy Now
           </Button>
         </div>
