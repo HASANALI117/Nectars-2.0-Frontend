@@ -31,6 +31,7 @@ export default function App(props) {
 
   function handleLogout() {
     setIsAuthenticated(false);
+    window.location.href = "/";
   }
 
   function handleSignUp() {
@@ -168,7 +169,8 @@ export default function App(props) {
             }}
             onClick={handleCloseSignIn}
           >
-            Ｘ
+            {/* 🆇 */}
+            🅇
           </Button>
           <Card.Header className="signinCardHead">Sign In</Card.Header>
           <Card.Body>
@@ -217,7 +219,8 @@ export default function App(props) {
             }}
             onClick={handleCloseSignIn}
           >
-            Ｘ
+            {/* 🆇 */}
+            🅇
           </Button>
           <Card.Header className="signinCardHead">Sign Up</Card.Header>
           <Card.Body>
