@@ -5,12 +5,26 @@ import { NextUIProvider } from "@nextui-org/react";
 import Navbar from "../../comonents/navbar/Navbar";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
+import BACKEND_URL from "../../constants";
 
 export default function ShopHome() {
   const { shopName } = useParams();
+  const [shopId, setShopId] = useState({});
+  const [shopOwnerId, setShopOwnerId] = useState({});
 
   useEffect(() => {
-    console.log(shopName);
+    axios
+      .get(`${BACKEND_URL}/shops/${shopName}/`)
+      .then((res) => {
+        console.log(res.data);
+        setShopId(res.data.shopId);
+        setShopOwnerId(res.data.shopOwner);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (
