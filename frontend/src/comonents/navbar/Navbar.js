@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Navbar,
   Text,
@@ -17,14 +17,17 @@ export default function App(props) {
   const [showSignUpCard, setShowSignUpCard] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    console.log(`email: ${email} username: ${username} password: ${password}`);
+  }, [email, username, password]);
 
   function handleLogin() {
     setShowSignInCard(true);
   }
 
   function handleSignIn() {
-    // Here you can add your own code to verify the user's credentials
-    // For the sake of this example, we'll just set isAuthenticated to true
     setIsAuthenticated(true);
     setShowSignInCard(false);
   }
@@ -180,6 +183,7 @@ export default function App(props) {
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              aria-label="Username"
             />
             <Input.Password
               className="signinInput"
@@ -187,6 +191,7 @@ export default function App(props) {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              aria-label="Password"
             />
 
             <Button
@@ -224,11 +229,24 @@ export default function App(props) {
           </Button>
           <Card.Header className="signinCardHead">Sign Up</Card.Header>
           <Card.Body>
-            <Input
+            {/* <Dropdown>
+              <Dropdown.Button color="warning">{selectedValue}</Dropdown.Button>
+              <Dropdown.Menu
+                aria-label="Single selection actions"
+                disallowEmptySelection
+                selectionMode="single"
+                selectedKeys={selected}
+                onSelectionChange={setSelected}
+              >
+                <Dropdown.Item key="User">User</Dropdown.Item>
+                <Dropdown.Item key="Shop_Owner">Shop Owner</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown> */}
+            {/* <Input
               className="signinInput"
               clearable
               placeholder="User / Shop Owner"
-            />
+            /> */}
 
             <Input
               className="signinInput"
@@ -238,7 +256,13 @@ export default function App(props) {
               onChange={(e) => setUsername(e.target.value)}
             />
 
-            <Input className="signinInput" clearable placeholder="Email" />
+            <Input
+              className="signinInput"
+              clearable
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
             <Input.Password
               className="signinInput"
