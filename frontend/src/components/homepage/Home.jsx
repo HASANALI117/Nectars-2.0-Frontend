@@ -30,7 +30,7 @@ export const Home = () => {
   return (
     
     <div className="Home">
-       
+
     <div className="overlap-group-wrapper">
    
       <div className="overlap-group">

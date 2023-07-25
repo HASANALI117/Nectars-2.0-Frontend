@@ -1,59 +1,26 @@
+// import logo from './logo.svg';
+
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { Home } from "./components/homepage/Home";
-import NavBar from "./components/navbar/NavBar";
-import ProductsCarousel from "./components/product/ProductsCarousel";
-import ProductDetails from "./components/product/ProductDetails";
+import Banner from "./components/banner/Banner";
+import BannerVal from "./components/banner/BannerVal";
+import ShopHome from "./components/shop/ShopHome";
+import Dashboard from "./components/shop/Dashboard";
+import SignUpPage from "./components/homepage/SignUpPage";
+import ShopInfo from "./components/homepage/ShopInfo";
 
 function App() {
-  const carouselProps = {
-    swipeable: true,
-    draggable: false,
-    showDots: false,
-    ssr: true,
-    infinite: false,
-    keyBoardControl: true,
-    transitionDuration: 500,
-    containerClass: "carousel-container",
-    removeArrowOnDeviceType: ["tablet", "mobile"],
-    dotListClass: "custom-dot-list-style",
-    itemClass: "carousel-item-padding-40-px",
-  };
-
-  const detailsProps = {
-    bgColor: "#3c4048",
-    title: "Burger",
-    description: "Desssssssssssssssssssssssscription",
-  };
-
   return (
     <>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/test"
-            element={
-              <div>
-                <NavBar detailsCustom={detailsProps} />
-
-                <ProductsCarousel
-                  isCarousel={false}
-                  carouselCustom={carouselProps}
-                />
-              </div>
-            }
-          />
-          <Route
-            path="/test/product-details"
-            element={
-              <div>
-                <NavBar detailsCustom={detailsProps} />
-
-                <ProductDetails detailsCustom={detailsProps} />
-              </div>
-            }
-          />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/shopinfo" element={<ShopInfo />} />
+          <Route path="/:shopName/" element={<ShopHome />} />
+          <Route path="/:shopName/home" element={<ShopHome />} />
+          <Route path="/:shopName/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
     </>
