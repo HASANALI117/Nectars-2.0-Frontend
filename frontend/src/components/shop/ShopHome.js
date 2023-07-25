@@ -1,8 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ProductCard from "../../comonents/product/ProductCard";
+import ProductCard from "../../components/product/ProductCard";
 import { NextUIProvider } from "@nextui-org/react";
-import Navbar from "../../comonents/navbar/Navbar";
+import Navbar from "../navbar/Navbar";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import NavbarSettings from "../customization/navbarSettings/NavbarSettings";

@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Dropdown, useTheme } from "@nextui-org/react";
 import { SelectorWrapper } from "./SelectWrapper";
 import { useState, useMemo } from "react";
-import Navbar from "../../../comonents/navbar/Navbar";
+import NavBar from "../../navbar/Navbar";
 
 export default function App() {
   const [variant, setVariant] = useState("default");
@@ -101,7 +101,7 @@ export default function App() {
           </Card.Body>
         </Card>
       </SelectorWrapper>
-      <Navbar
+      <NavBar
         variant={selectedVar}
         activeColor={selectedCol}
         dropdownColor={selectedCol}

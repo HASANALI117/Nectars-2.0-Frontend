@@ -10,11 +10,10 @@ import {
   Card,
 } from "@nextui-org/react";
 import { SearchIcon } from "./Searchicon.js";
-import { Button, Link } from "@nextui-org/react";
 import { CSSTransition } from "react-transition-group";
-import Cart from "./Cart";
+import Cart from "./Cart.jsx";
 
-export default function App(props) {
+export default function NavBar(props) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
