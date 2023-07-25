@@ -10,9 +10,15 @@ import {
   Card,
 } from "@nextui-org/react";
 import { SearchIcon } from "./Searchicon.js";
+import { Button, Link } from "@nextui-org/react";
+import { CSSTransition } from "react-transition-group";
+import Cart from "./Cart";
 
 export default function App(props) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showCart, setShowCart] = useState(false);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+
   const [showSignInCard, setShowSignInCard] = useState(false);
   const [showSignUpCard, setShowSignUpCard] = useState(false);
   const [username, setUsername] = useState("");
@@ -51,6 +57,11 @@ export default function App(props) {
     setShowSignUpCard(false);
   }
 
+  const handleShowCart = () => {
+    console.log("cart");
+    setShowCart(!showCart);
+    setIsButtonClicked(true);
+  };
   return (
     <>
       <Navbar isBordered variant="sticky">
@@ -79,15 +90,18 @@ export default function App(props) {
             >
               Categories
             </Navbar.Link>
-            {isAuthenticated ? (
-              <Navbar.Link
-                isActive={activeLink === "cart"}
-                href="#"
-                onClick={() => handleLinkClick("cart")}
-              >
-                Cart
-              </Navbar.Link>
-            ) : null}
+            <Button
+              auto
+              flat
+              as={Link}
+              color={props.signupColor}
+              onPress={handleShowCart}
+            >
+              Cart
+            </Button>
+            <CSSTransition in={showCart} timeout={50} unmountOnExit>
+              <Cart detailsCustom={props} />
+            </CSSTransition>
           </Navbar.Content>
         </Navbar.Brand>
         <Navbar.Content
