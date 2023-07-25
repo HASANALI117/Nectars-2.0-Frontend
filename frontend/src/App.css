@@ -613,3 +613,7 @@ button[type="submit"]:hover {
     height: 100vh;
 }
 
+.selectcolor{
+  padding: 5px;
+}
+

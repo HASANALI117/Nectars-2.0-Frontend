@@ -5,6 +5,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import Navbar from "../../comonents/navbar/Navbar";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import NavbarSettings from "../customization/navbarSettings/NavbarSettings";
 
 export default function ShopHome() {
   const { shopName } = useParams();
@@ -15,21 +16,13 @@ export default function ShopHome() {
 
   return (
     <NextUIProvider>
-      <Navbar
-        brand="ShopName"
-        dropdownColor="secondary"
-        signupColor="secondary"
-        loginColor="text"
-        profilePic="https://i.pravatar.cc/300"
-        buttonColor="secondary"
-        variant="default"
-        activeColor="secondary"
-      />
-      <ProductCard
+      <NavbarSettings />
+
+      {/* <ProductCard
         name="Product Name"
         desc="This product is a product of many products that are produced here."
         price="$9.99"
-      />
+      /> */}
     </NextUIProvider>
   );
 }
