@@ -14,7 +14,7 @@ export default function Product(props) {
   const [uploadedPosterUrl, setUploadedPosterUrl] = useState("");
   const [uploadedProductUrls, setUploadedProductUrls] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState();
 
   useEffect(() => {
     console.log("props.shopId", props.shopId);
@@ -26,9 +26,15 @@ export default function Product(props) {
         },
       })
       .then((response) => {
+        console.log("response.data", response.data);
+        setCategory(response.data[0].categoryId);
         setCategories(response.data);
       });
   }, []);
+
+  useEffect(() => {
+    console.log("category", category);
+  }, [category]);
 
   useEffect(() => {
     axios
@@ -95,20 +101,26 @@ export default function Product(props) {
       name: e.target.name.value,
       price: e.target.price.value,
       description: e.target.description.value,
-      posterImageUrl,
-      productImageUrls,
+      categoryId: category,
+      poster_image_url: posterImageUrl,
+      image_urls: productImageUrls,
     };
 
     console.log(productData);
 
-    // try {
-    //   await axios.post("/api/products", productData);
-    //   alert("Product data and image URLs saved to the database successfully!");
-    //   // Perform any additional logic after successful save
-    // } catch (error) {
-    //   console.error(error);
-    //   alert("Error saving product data and image URLs to the database.");
-    // }
+    axios
+      .post(`${BACKEND_URL}/products/create/`, productData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setProducts([...products, productData]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const uploadImageToS3 = async (file) => {
@@ -116,10 +128,10 @@ export default function Product(props) {
 
     // Configure your AWS credentials here
     AWS.config.update({
-      accessKeyId: "ASIAZ55AM5YJWISHGREK",
-      secretAccessKey: "lQo5WdNe/5b2SrdDeHLXMKGjQdqnRYgCWOJIiOzN",
+      accessKeyId: "ASIAZ55AM5YJRAYYBAWN",
+      secretAccessKey: "G1uSGtOwRHdWaxd5sunmqhcmiPDyfdNthwdOk4W+",
       sessionToken:
-        "IQoJb3JpZ2luX2VjEE4aCm1lLXNvdXRoLTEiSDBGAiEAt6q6ee4o3GEV0sXUBXUrtT/7mrz6qqxiNpKzCW/hCZACIQDsYBO2JjW8FOz7heUzEvisuZ0FpJCDSki7+K/egM0yGCroAggqEAAaDDY4MjY5OTMyMDg1MSIMrnqapBNMkQm4ZDbCKsUCqkbBFXNHTWS6YrlVKEJN2Dwhb7UR8VRFIQJox8K7ic5WaiDvw3wlLnFOLK+Fy4nDcdVw/m/mQYcRXEU/LnLi4MhMfhvs7In144xssA8swnItPaaWOxl9iKoQj0NvHaBscDvqL2UKJJa2/h6Doy1ecHhcVDkxZrAQRFhFhpHbkd/2y1Sx4Xzy2O/OvyuR2XqLKJ+X6kDsKVsdyeI7F4kuJ7JlQVE5nP2DbR5kslVkCw+Y7RGlH45AnK7xJV/Oz4iaK24Ula+7V63a/j272+fWObqj5GRrGfbf43TVj9VlKNzi4QAC7+HuelV5thTsrF+qJDXWS8WHpaa/g72gUPX6o07vZkcDgBwl3lavpg6aXxID0H1pPZwjX1jwPhGw8cKaZ9BQNJS3ix2a6L0n0xIZwFraYaM8j3ZLsUCyPMOiXrcjdOzYGTCEov6lBjqmAfh1BBlkmPNmSVedplk1kTdylmOlZHxxZUKVQ3CYTLQ4Qifdob8L3kJuuLHixPvfJKb3MCeMB6/of9QuqlwZXslEQ8dOTqfU09uZjPPKY0gDkmew83Gqyoy2D8g5mzGk3QsjHYCUtkP/QTRxQGxhPBqin+5hZVnerRIPQee7lV6olR5xHpqCBamzF/IhgzySxUVQbYldmfboXOUnuBCS/jhGtCKtWOY=",
+        "IQoJb3JpZ2luX2VjEFcaCm1lLXNvdXRoLTEiRjBEAiBFN6cmU9xJyl8Rsm/Xoif0Nf0DIehGR1aB/d/SmEo2tAIgShLEs1TFg8afHEodJNtF98Z4YHxX6/LtLfzY61VC9dkq6AIIMxAAGgw2ODI2OTkzMjA4NTEiDNvpl4YNba5EG+9gTyrFAmZKM6KasJiXOI2TqgaA7TLqvzpxwRyQjaOH2XZU7rB1x2FZVi4ohXSQZH5n6p7FAePnIL0CjzDgTLgi6cltxTRTgm68xhAYG2iomuGR0wtvecMpgZcXqNdAPjdbW7EGRM3NVi37c9BcTvDDK/P0OIIhwhKLhgLP1cIL3bSEGoEV2SVvj11HGN8B5lUXQ/qL2VX19rEyhD6D208LovzS0D7GPEFxOZKc57o6z39JlgQBIzqKxItNsv6ytrl3owvGUZYwtb+hdDTBCabNeu0Cu84v0qRIrKyPNBi/foYG0WmJ7cnE62FrHVHaURR10sR+JjufyrjK8A5SawAila1C1dnv1jb9ZQWajXPtW/P0kpNlT+g9A9bl+ILuTdZSP1kF9GJHg5Nc6elGQokZdOV37z5FxYCgXALAE89iqxW4DZ7R2/xsrQsw85qApgY6qAHnfqDabD06B0ccdmfB3Ixsx1jCy7QJb531f3JFIDcCLzDnZ2hmR8e3VJGlHYd6jOjdKRqaxBelcdnv8e7DeX0X/vnWhl+VmEId8VLjiGtS04YJAwcAGd1Vye3cz0ZcR0BVxcvEgt+tqZQi94nYhkkV4FZfqZQ/xmCJkOvtLrIC9toS9HqZkbWOi7mHZTVZk4rM1Cn5/+tMaYo58s1E2zUhwg701EM3aKo=",
       region: "me-south-1",
     });
 
@@ -275,7 +287,10 @@ export default function Product(props) {
                   >
                     {/* Generate options for each category */}
                     {categories.map((category) => (
-                      <option key={category.id} value={category.id}>
+                      <option
+                        key={category.categoryId}
+                        value={category.categoryId}
+                      >
                         {category.name}
                       </option>
                     ))}
