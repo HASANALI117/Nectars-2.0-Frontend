@@ -13,32 +13,49 @@ import BACKEND_URL from "../../constants";
 
 export default function ShopHome() {
   const { shopName } = useParams();
-  const [shopId, setShopId] = useState({});
-  const [shopOwnerId, setShopOwnerId] = useState({});
+  const [shopId, setShopId] = useState();
+  const [shopOwnerId, setShopOwnerId] = useState();
+  const [shopProps, setShopProps] = useState({});
 
   useEffect(() => {
     axios
       .get(`${BACKEND_URL}/shops/${shopName}/`)
       .then((res) => {
         console.log(res.data);
-        setShopId(res.data.shopId);
-        setShopOwnerId(res.data.shopOwner);
+        setShopId(res.data[0].shopId);
+        setShopOwnerId(res.data[0].shopOwner);
+
+        axios
+          .get(`${BACKEND_URL}/shops/${res.data[0].shopId}/props/`)
+          .then((res) => {
+            console.log(res.data);
+            setShopProps(res.data[0].props);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  const bannerData = {
-    imageUrl:
-      "https://t4.ftcdn.net/jpg/04/28/76/95/360_F_428769564_NB2T4JM9E2xsxFdXXwqW717HwgaZdpAq.jpg", // a url to add an image
-    color: "", // a color to add a background color
-    overlay: true, // a boolean to add an overlay
-    title: "Welcome to the Jungle", // a title
-    titleColor: "white", // a title color
-    titleSize: "30px", // a title size
-    titleAlignment: "center", // a title alignment
-  };
+  useEffect(() => {
+    console.log("props", shopProps);
+  }, [shopProps]);
+
+  // const bannerData = {
+  //   imageUrl:
+  //     "https://t4.ftcdn.net/jpg/04/28/76/95/360_F_428769564_NB2T4JM9E2xsxFdXXwqW717HwgaZdpAq.jpg", // a url to add an image
+  //   color: "", // a color to add a background color
+  //   overlay: true, // a boolean to add an overlay
+  //   title: "Welcome to the Jungle", // a title
+  //   titleColor: "white", // a title color
+  //   titleSize: "30px", // a title size
+  //   titleAlignment: "center", // a title alignment
+  // };
+
+  const bannerData = shopProps.banner;
 
   return (
     <NextUIProvider>
