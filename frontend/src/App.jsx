@@ -48,7 +48,7 @@ function App() {
             path="/test/product-details"
             element={
               <div>
-                <NavBar />
+                <NavBar detailsCustom={detailsProps} />
 
                 <ProductDetails detailsCustom={detailsProps} />
               </div>
