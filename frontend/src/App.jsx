@@ -7,7 +7,8 @@ import Banner from './components/banner/Banner';
 import BannerVal from './components/banner/BannerVal';
 import ShopHome from "./components/shop/ShopHome";
 import Dashboard from "./components/shop/Dashboard";
-
+import SignUpPage from './components/homepage/SignUpPage';
+import ShopInfo from './components/homepage/ShopInfo';
 
 function App() {
   return (
@@ -16,9 +17,12 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/shopinfo" element={<ShopInfo />} />
           <Route path="/:shopName/" element={<ShopHome />} />
           <Route path="/:shopName/home" element={<ShopHome />} />
           <Route path="/:shopName/dashboard" element={<Dashboard />} />
+
         </Routes>
       </Router>
     </>
