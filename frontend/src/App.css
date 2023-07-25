@@ -49,16 +49,16 @@
 }
 
 .Home .p {
-    color: #000000;
-    font-family: "Inter-Bold", Helvetica;
-    font-size: 32px;
-    font-weight: 700;
-    left: 69px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 798px;
-    width: 568px;
+  color: #000000;
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 32px;
+  font-weight: 700;
+  left: 69px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 798px;
+  width: 568px;
 }
 
 .Home .text-wrapper-2 {
@@ -163,12 +163,12 @@
   width: 321px;
 }
 
-.productCard {
+/* .productCard {
   margin: 0 auto;
   margin-top: 10%;
   background-color: black;
   color: linen;
-}
+} */
 
 .productTitle {
   font-size: 36px;
@@ -210,6 +210,7 @@
   padding: auto;
   opacity: 0;
   transition: opacity 0.6s ease-out;
+  border-radius: 10px 10px 0 0;
 }
 
 .cardOverlay:hover {
@@ -309,99 +310,102 @@
 }
 
 .content-torch {
-    /* background-color: #ffffff; */
-    width: 75%;
-    height: 65%;
-    margin: 100px 10px 0px 180px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    gap: 280px;
-    padding-top: 140px;
+  /* background-color: #ffffff; */
+  width: 75%;
+  height: 65%;
+  margin: 100px 10px 0px 180px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 280px;
+  padding-top: 140px;
 }
 
 .text-inv-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 80px;
-    padding-right: 60px;
-    font-size: 30px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 80px;
+  padding-right: 60px;
+  font-size: 30px;
+  width: 100%;
 }
 
 .text-inv-card-2 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 65px;
-    padding-right: 60px;
-    font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 65px;
+  padding-right: 60px;
+  font-size: 30px;
 }
 
 .text-inv-card-title {
-    color: rgba(208, 75, 0, 1);
+  color: rgba(208, 75, 0, 1);
 }
 
 .text-inv-card-title-2 {
-    padding-bottom: 30px;
-    color: rgba(208, 75, 0, 1);
+  padding-bottom: 30px;
+  color: rgba(208, 75, 0, 1);
 }
 
 .text-inv-card-p {
-    color: rgba(161, 60, 4, 1)
+  color: rgba(161, 60, 4, 1);
 }
 
 .text-inv-card-p:hover {
-    color: rgb(214, 103, 38);
-    text-shadow: 0 0 7px rgba(208, 75, 0, 1), 0 0 10px rgba(208, 75, 0, 1), 0 0 21px rgba(208, 75, 0, 1);
-    transition: color 0.5s ease-out, text-shadow 1s ease-out;
+  color: rgb(214, 103, 38);
+  text-shadow: 0 0 7px rgba(208, 75, 0, 1), 0 0 10px rgba(208, 75, 0, 1),
+    0 0 21px rgba(208, 75, 0, 1);
+  transition: color 0.5s ease-out, text-shadow 1s ease-out;
 }
 
 .text-inv-card-p-2 {
-    color: rgba(161, 60, 4, 1)
+  color: rgba(161, 60, 4, 1);
 }
 
 .text-inv-card-p-2:hover {
-    color: rgb(214, 103, 38);
-    text-shadow: 0 0 7px rgba(208, 75, 0, 1), 0 0 10px rgba(208, 75, 0, 1), 0 0 21px rgba(208, 75, 0, 1);
-    transition: color 0.5s ease-out, text-shadow 1s ease-out;
+  color: rgb(214, 103, 38);
+  text-shadow: 0 0 7px rgba(208, 75, 0, 1), 0 0 10px rgba(208, 75, 0, 1),
+    0 0 21px rgba(208, 75, 0, 1);
+  transition: color 0.5s ease-out, text-shadow 1s ease-out;
 }
 
 h1.react-typewriter-text {
-    color: #221f1fd6;
-    font-family: "Inter-BlackItalic", Helvetica;
-    font-size: 8vw;
-    padding-top: 86px;
-    padding-right: 250px;
-    padding-left: 50px;
-    font-weight: 900;
-    /* bottom: 560px */
-    /* padding: 200px 200px 200px 200px; */
+  color: #221f1fd6;
+  font-family: "Inter-BlackItalic", Helvetica;
+  font-size: 8vw;
+  padding-top: 86px;
+  padding-right: 250px;
+  padding-left: 50px;
+  font-weight: 900;
+  /* bottom: 560px */
+  /* padding: 200px 200px 200px 200px; */
 }
 
 .react-typewriter-text:hover {
-    color: #9a1515df;
+  color: #9a1515df;
 }
 
 .Home .your-store {
-    color: #f07c3b;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 64px;
-    font-weight: 500;
-    left: 86px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 4763px;
-    width: 1000px;
-    font-weight: 900;
+  color: #f07c3b;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 64px;
+  font-weight: 500;
+  left: 86px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 4763px;
+  width: 1000px;
+  font-weight: 900;
 }
 
 .your-store:hover {
-    color: #f49660ec;
-    text-shadow: 0 0 7px #f07c3b, 0 0 10px #f07c3b, 0 0 21px #f07c3b, 0 0 72px #f07d3b57;
-    transition: color 0.5s ease-out, text-shadow 1s ease-out;
+  color: #f49660ec;
+  text-shadow: 0 0 7px #f07c3b, 0 0 10px #f07c3b, 0 0 21px #f07c3b,
+    0 0 72px #f07d3b57;
+  transition: color 0.5s ease-out, text-shadow 1s ease-out;
 }
 
 /* Media queries for responsiveness */
@@ -438,44 +442,44 @@ h1.react-typewriter-text {
 /* Add more media queries as needed for different screen sizes */
 
 @media screen and (max-width: 1920px) {
-    .Home .text-wrapper {
-        font-size: 96px;
-    }
-    .Home .p {
-        font-size: 24px;
-    }
-    .Home .text-wrapper-2 {
-        font-size: 40px;
-    }
-    .Home .text-wrapper-3 {
-        font-size: 14px;
-    }
-    .Home .text-wrapper-4 {
-        font-size: 32px;
-    }
-    .Home .text-wrapper-5 {
-        font-size: 28px;
-    }
-    .Home .text-wrapper-6 {
-        font-size: 28px;
-    }
-    .Home .text-wrapper-7 {
-        font-size: 48px;
-    }
-    .Home .text-wrapper-8 {
-        font-size: 48px;
-    }
+  .Home .text-wrapper {
+    font-size: 96px;
+  }
+  .Home .p {
+    font-size: 24px;
+  }
+  .Home .text-wrapper-2 {
+    font-size: 40px;
+  }
+  .Home .text-wrapper-3 {
+    font-size: 14px;
+  }
+  .Home .text-wrapper-4 {
+    font-size: 32px;
+  }
+  .Home .text-wrapper-5 {
+    font-size: 28px;
+  }
+  .Home .text-wrapper-6 {
+    font-size: 28px;
+  }
+  .Home .text-wrapper-7 {
+    font-size: 48px;
+  }
+  .Home .text-wrapper-8 {
+    font-size: 48px;
+  }
 }
 
 .nextui-c-hhqfap-gqZKcP-disableBlur-false .nextui-c-egxOLa {
-    display: flex;
+  display: flex;
 }
 
 .earth {
-    position: absolute;
-    top: 2000px;
-    left: -160px;
-    width: 566px;
-    height: 566px;
-    opacity: 50%;
+  position: absolute;
+  top: 2000px;
+  left: -160px;
+  width: 566px;
+  height: 566px;
+  opacity: 50%;
 }
