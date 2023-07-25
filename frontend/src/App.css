@@ -220,6 +220,7 @@
 .brandName {
   font-size: 30px;
   color: black;
+  text-decoration: none;
 }
 
 .navContent {
@@ -325,7 +326,8 @@
   max-width: 25%;
   padding: 15px;
   margin: 10px;
-  margin-left: 70%;
+  margin-left: 70% !important;
+  margin-top: 2% !important;
 }
 .signinCardHead {
   margin-left: 38%;
@@ -541,3 +543,4 @@ h1.react-typewriter-text {
 .show-overlay .overlay {
   display: block;
 }
+

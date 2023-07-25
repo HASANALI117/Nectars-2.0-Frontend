@@ -18,6 +18,11 @@ export default function App(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [activeLink, setActiveLink] = useState();
+
+  function handleLinkClick(link) {
+    setActiveLink(link);
+  }
 
   useEffect(() => {
     console.log(`email: ${email} username: ${username} password: ${password}`);
@@ -55,10 +60,34 @@ export default function App(props) {
               {props.brand}
             </a>
           </Text>
-          <Navbar.Content variant="highlight" className="navContent">
-            <Navbar.Link href="#">All</Navbar.Link>
-            <Navbar.Link href="#">Categories</Navbar.Link>
-            {isAuthenticated ? <Navbar.Link href="#">Cart</Navbar.Link> : null}
+          <Navbar.Content
+            variant={props.variant}
+            activeColor={props.activeColor}
+            className="navContent"
+          >
+            <Navbar.Link
+              isActive={activeLink === "all"}
+              href="#"
+              onClick={() => handleLinkClick("all")}
+            >
+              All
+            </Navbar.Link>
+            <Navbar.Link
+              isActive={activeLink === "categories"}
+              href="#"
+              onClick={() => handleLinkClick("categories")}
+            >
+              Categories
+            </Navbar.Link>
+            {isAuthenticated ? (
+              <Navbar.Link
+                isActive={activeLink === "cart"}
+                href="#"
+                onClick={() => handleLinkClick("cart")}
+              >
+                Cart
+              </Navbar.Link>
+            ) : null}
           </Navbar.Content>
         </Navbar.Brand>
         <Navbar.Content
@@ -229,25 +258,6 @@ export default function App(props) {
           </Button>
           <Card.Header className="signinCardHead">Sign Up</Card.Header>
           <Card.Body>
-            {/* <Dropdown>
-              <Dropdown.Button color="warning">{selectedValue}</Dropdown.Button>
-              <Dropdown.Menu
-                aria-label="Single selection actions"
-                disallowEmptySelection
-                selectionMode="single"
-                selectedKeys={selected}
-                onSelectionChange={setSelected}
-              >
-                <Dropdown.Item key="User">User</Dropdown.Item>
-                <Dropdown.Item key="Shop_Owner">Shop Owner</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown> */}
-            {/* <Input
-              className="signinInput"
-              clearable
-              placeholder="User / Shop Owner"
-            /> */}
-
             <Input
               className="signinInput"
               clearable

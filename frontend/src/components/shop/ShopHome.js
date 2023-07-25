@@ -15,7 +15,16 @@ export default function ShopHome() {
 
   return (
     <NextUIProvider>
-      <Navbar brand={shopName} dropdownColor="success" />
+      <Navbar
+        brand="ShopName"
+        dropdownColor="secondary"
+        signupColor="secondary"
+        loginColor="text"
+        profilePic="https://i.pravatar.cc/300"
+        buttonColor="secondary"
+        variant="default"
+        activeColor="secondary"
+      />
       <ProductCard
         name="Product Name"
         desc="This product is a product of many products that are produced here."
