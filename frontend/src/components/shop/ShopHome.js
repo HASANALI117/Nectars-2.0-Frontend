@@ -7,12 +7,26 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import NavbarSettings from "../customization/navbarSettings/NavbarSettings";
 import Banner from "../banner/Banner";
+import { useState } from "react";
+import axios from "axios";
+import BACKEND_URL from "../../constants";
 
 export default function ShopHome() {
   const { shopName } = useParams();
+  const [shopId, setShopId] = useState({});
+  const [shopOwnerId, setShopOwnerId] = useState({});
 
   useEffect(() => {
-    console.log(shopName);
+    axios
+      .get(`${BACKEND_URL}/shops/${shopName}/`)
+      .then((res) => {
+        console.log(res.data);
+        setShopId(res.data.shopId);
+        setShopOwnerId(res.data.shopOwner);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const bannerData = {
