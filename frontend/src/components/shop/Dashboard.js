@@ -14,41 +14,55 @@ import { useState } from "react";
 
 export default function Dashboard() {
   const { shopName } = useParams();
-  const [shopId, setShopId] = useState({});
-  const [shopOwnerId, setShopOwnerId] = useState({});
+  const [shopId, setShopId] = useState();
+  const [shopOwnerId, setShopOwnerId] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     axios
       .get(`${BACKEND_URL}/shops/${shopName}/`)
       .then((res) => {
-        console.log(res.data);
-        setShopId(res.data.shopId);
-        setShopOwnerId(res.data.shopOwner);
+        console.log(res.data[0].shopId);
+        setShopId(res.data[0].shopId);
+        setShopOwnerId(res.data[0].shopOwner);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
+  useEffect(() => {
+    console.log("shopId", shopId);
+    if (shopId) {
+      setIsLoading(false);
+    }
+  }, [shopId]);
+
   return (
-    <Tabs
-      defaultActiveKey="profile"
-      id="justify-tab-example"
-      className="mb-3"
-      justify
-    >
-      <Tab eventKey="empty" title="" disabled></Tab>
-      <Tab eventKey="products" title="Products">
-        <Product shopId={shopId} />
-      </Tab>
-      <Tab eventKey="categories" title="Categories">
-        <Categories shopId={shopId} />
-      </Tab>
-      <Tab eventKey="users" title="Users">
-        <Users shopId={shopId} />
-      </Tab>
-      <Tab eventKey="orders" title="Orders">
-        <Orders shopId={shopId} />
-      </Tab>
-    </Tabs>
+    <div>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <Tabs
+          defaultActiveKey="profile"
+          id="justify-tab-example"
+          className="mb-3"
+          justify
+        >
+          <Tab eventKey="empty" title="" disabled></Tab>
+          <Tab eventKey="products" title="Products">
+            <Product shopId={shopId} />
+          </Tab>
+          <Tab eventKey="categories" title="Categories">
+            <Categories shopId={shopId} />
+          </Tab>
+          <Tab eventKey="users" title="Users">
+            <Users shopId={shopId} />
+          </Tab>
+          <Tab eventKey="orders" title="Orders">
+            <Orders shopId={shopId} />
+          </Tab>
+        </Tabs>
+      )}
+    </div>
   );
 }

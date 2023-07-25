@@ -5,23 +5,46 @@ import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
 import axios from "axios";
 import AWS from "aws-sdk";
+import BACKEND_URL from "../../../constants";
 
-export default function Product() {
+export default function Product(props) {
   const [products, setProducts] = useState([]);
   const [posterImage, setPosterImage] = useState(null);
   const [productImages, setProductImages] = useState([]);
   const [uploadedPosterUrl, setUploadedPosterUrl] = useState("");
   const [uploadedProductUrls, setUploadedProductUrls] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState("");
 
   useEffect(() => {
-    // axios.get("/api/products").then((response) => {
-    //   setProducts(response.data);
-    // });
-    setProducts([
-      { id: 1, name: "Product 1", price: 10, description: "Description 1" },
-      { id: 2, name: "Product 2", price: 20, description: "Description 2" },
-      { id: 3, name: "Product 3", price: 30, description: "Description 3" },
-    ]);
+    console.log("props.shopId", props.shopId);
+    const token = localStorage.getItem("access");
+    axios
+      .get(`${BACKEND_URL}/categories/shop/${props.shopId}/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setCategories(response.data);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${BACKEND_URL}/shopProducts/${props.shopId}/`)
+      .then((response) => {
+        setProducts(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // setProducts([
+    //   { id: 1, name: "Product 1", price: 10, description: "Description 1" },
+    //   { id: 2, name: "Product 2", price: 20, description: "Description 2" },
+    //   { id: 3, name: "Product 3", price: 30, description: "Description 3" },
+    // ]);
   }, []);
 
   const handleDelete = (id) => {
@@ -76,14 +99,16 @@ export default function Product() {
       productImageUrls,
     };
 
-    try {
-      await axios.post("/api/products", productData);
-      alert("Product data and image URLs saved to the database successfully!");
-      // Perform any additional logic after successful save
-    } catch (error) {
-      console.error(error);
-      alert("Error saving product data and image URLs to the database.");
-    }
+    console.log(productData);
+
+    // try {
+    //   await axios.post("/api/products", productData);
+    //   alert("Product data and image URLs saved to the database successfully!");
+    //   // Perform any additional logic after successful save
+    // } catch (error) {
+    //   console.error(error);
+    //   alert("Error saving product data and image URLs to the database.");
+    // }
   };
 
   const uploadImageToS3 = async (file) => {
@@ -91,9 +116,11 @@ export default function Product() {
 
     // Configure your AWS credentials here
     AWS.config.update({
-      accessKeyId: "YOUR_AWS_ACCESS_KEY_ID",
-      secretAccessKey: "YOUR_AWS_SECRET_ACCESS_KEY",
-      region: "YOUR_AWS_REGION",
+      accessKeyId: "ASIAZ55AM5YJWISHGREK",
+      secretAccessKey: "lQo5WdNe/5b2SrdDeHLXMKGjQdqnRYgCWOJIiOzN",
+      sessionToken:
+        "IQoJb3JpZ2luX2VjEE4aCm1lLXNvdXRoLTEiSDBGAiEAt6q6ee4o3GEV0sXUBXUrtT/7mrz6qqxiNpKzCW/hCZACIQDsYBO2JjW8FOz7heUzEvisuZ0FpJCDSki7+K/egM0yGCroAggqEAAaDDY4MjY5OTMyMDg1MSIMrnqapBNMkQm4ZDbCKsUCqkbBFXNHTWS6YrlVKEJN2Dwhb7UR8VRFIQJox8K7ic5WaiDvw3wlLnFOLK+Fy4nDcdVw/m/mQYcRXEU/LnLi4MhMfhvs7In144xssA8swnItPaaWOxl9iKoQj0NvHaBscDvqL2UKJJa2/h6Doy1ecHhcVDkxZrAQRFhFhpHbkd/2y1Sx4Xzy2O/OvyuR2XqLKJ+X6kDsKVsdyeI7F4kuJ7JlQVE5nP2DbR5kslVkCw+Y7RGlH45AnK7xJV/Oz4iaK24Ula+7V63a/j272+fWObqj5GRrGfbf43TVj9VlKNzi4QAC7+HuelV5thTsrF+qJDXWS8WHpaa/g72gUPX6o07vZkcDgBwl3lavpg6aXxID0H1pPZwjX1jwPhGw8cKaZ9BQNJS3ix2a6L0n0xIZwFraYaM8j3ZLsUCyPMOiXrcjdOzYGTCEov6lBjqmAfh1BBlkmPNmSVedplk1kTdylmOlZHxxZUKVQ3CYTLQ4Qifdob8L3kJuuLHixPvfJKb3MCeMB6/of9QuqlwZXslEQ8dOTqfU09uZjPPKY0gDkmew83Gqyoy2D8g5mzGk3QsjHYCUtkP/QTRxQGxhPBqin+5hZVnerRIPQee7lV6olR5xHpqCBamzF/IhgzySxUVQbYldmfboXOUnuBCS/jhGtCKtWOY=",
+      region: "me-south-1",
     });
 
     try {
@@ -222,7 +249,7 @@ export default function Product() {
               </ul>
             </Tab.Pane>
             <Tab.Pane eventKey="second">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="name">Name</label>
                   <input type="text" className="form-control" id="name" />
@@ -238,6 +265,21 @@ export default function Product() {
                     id="description"
                     rows="3"
                   ></textarea>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="category">Category</label>
+                  <select
+                    className="form-control"
+                    id="category"
+                    onChange={(e) => setCategory(e.target.value)}
+                  >
+                    {/* Generate options for each category */}
+                    {categories.map((category) => (
+                      <option key={category.id} value={category.id}>
+                        {category.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className="form-group">
                   <label htmlFor="posterImage">Poster Image</label>
@@ -262,6 +304,32 @@ export default function Product() {
                   Submit
                 </button>
               </form>
+              {uploadedPosterUrl && (
+                <div>
+                  <p>Uploaded Poster Image URL: {uploadedPosterUrl}</p>
+                  <img
+                    src={uploadedPosterUrl}
+                    alt="Uploaded Poster"
+                    style={{ maxWidth: "300px" }}
+                  />
+                </div>
+              )}
+              {uploadedProductUrls.length > 0 && (
+                <div>
+                  {uploadedProductUrls.map((url, index) => (
+                    <div key={index}>
+                      <p>
+                        Uploaded Product Image {index + 1} URL: {url}
+                      </p>
+                      <img
+                        src={url}
+                        alt={`Uploaded Product ${index + 1}`}
+                        style={{ maxWidth: "300px" }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </Tab.Pane>
           </Tab.Content>
         </Col>

@@ -3,24 +3,72 @@ import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
+import BACKEND_URL from "../../../constants";
+import axios from "axios";
 
-export default function Categories() {
+export default function Categories(props) {
   const [categories, setCategories] = useState([]);
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [newCategoryDescription, setNewCategoryDescription] = useState("");
 
   useEffect(() => {
-    // axios.get("/api/categories").then((response) => {
-    //   setCategories(response.data);
-    // });
-    setCategories([
-      { id: 1, name: "Category 1" },
-      { id: 2, name: "Category 2" },
-      { id: 3, name: "Category 3" },
-    ]);
+    console.log("props.shopId", props.shopId);
+    const token = localStorage.getItem("access");
+    axios
+      .get(`${BACKEND_URL}/categories/shop/${props.shopId}/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setCategories(response.data);
+      });
+    // setCategories([
+    //   { id: 1, name: "Category 1" },
+    //   { id: 2, name: "Category 2" },
+    //   { id: 3, name: "Category 3" },
+    // ]);
   }, []);
 
   const handleDelete = (id) => {
     setCategories(categories.filter((category) => category.id !== id));
   };
+
+  const handleNewCategoryNameChange = (event) => {
+    setNewCategoryName(event.target.value);
+  };
+
+  const handleNewCategoryDescriptionChange = (event) => {
+    setNewCategoryDescription(event.target.value);
+  };
+
+  const handleNewCategorySubmit = (event) => {
+    event.preventDefault();
+    const token = localStorage.getItem("access");
+    const newCategory = {
+      name: newCategoryName,
+      description: newCategoryDescription,
+    };
+    axios
+      .post(`${BACKEND_URL}/categories/create/`, newCategory, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setCategories([...categories, newCategory]);
+        setNewCategoryName("");
+        setNewCategoryDescription("");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    console.log("categories", categories);
+  }, [categories]);
 
   return (
     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -40,13 +88,16 @@ export default function Categories() {
             <Tab.Pane eventKey="first">
               <ul className="list-group">
                 {categories.map((category) => (
-                  <li key={category.id} className="list-group-item d-flex">
+                  <li
+                    key={category.categoryId}
+                    className="list-group-item d-flex"
+                  >
                     <div className="flex-grow-1">{category.name}</div>
                     <div>
                       <button
                         type="button"
                         className="btn btn-danger btn-sm ml-2"
-                        onClick={() => handleDelete(category.id)}
+                        onClick={() => handleDelete(category.categoryId)}
                       >
                         Delete
                       </button>
@@ -62,10 +113,16 @@ export default function Categories() {
               </ul>
             </Tab.Pane>
             <Tab.Pane eventKey="second">
-              <form>
+              <form onSubmit={handleNewCategorySubmit}>
                 <div className="form-group">
                   <label htmlFor="name">Name</label>
-                  <input type="text" className="form-control" id="name" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    value={newCategoryName}
+                    onChange={handleNewCategoryNameChange}
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="description">Description</label>
@@ -73,6 +130,8 @@ export default function Categories() {
                     className="form-control"
                     id="description"
                     rows="3"
+                    value={newCategoryDescription}
+                    onChange={handleNewCategoryDescriptionChange}
                   ></textarea>
                 </div>
                 <button type="submit" className="btn btn-primary">
