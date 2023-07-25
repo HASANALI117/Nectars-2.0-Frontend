@@ -9,6 +9,7 @@ import ShopHome from "./components/shop/ShopHome";
 import Dashboard from "./components/shop/Dashboard";
 import SignUpPage from "./components/homepage/SignUpPage";
 import ShopInfo from "./components/homepage/ShopInfo";
+import CustomizingPage from "./components/customization/CustomizingPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/shopinfo" element={<ShopInfo />} />
+          <Route path="/customization" element={<CustomizingPage />} />
           <Route path="/:shopName/" element={<ShopHome />} />
           <Route path="/:shopName/home" element={<ShopHome />} />
           <Route path="/:shopName/dashboard" element={<Dashboard />} />

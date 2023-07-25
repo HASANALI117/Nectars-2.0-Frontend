@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Dropdown, useTheme } from "@nextui-org/react";
 import { SelectorWrapper } from "./SelectWrapper";
 import { useState, useMemo } from "react";
-import NavBar from "../../navbar/Navbar";
+import NavBar from "../../navbar/NavBar";
 
 export default function App() {
   const [variant, setVariant] = useState("default");

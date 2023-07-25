@@ -1,23 +1,26 @@
-
-
-
-import React, { useState } from 'react';
+import React from "react";
 
 export default function Banner(props) {
-  const { imageUrl: initialImageUrl, color: initialColor, overlay: initialOverlay, title, titleColor, titleSize, titleAlignment,titleFont } = props;
-  const [imageUrl ] = useState(initialImageUrl);
-  const [color ] = useState(initialColor);
-  const [overlay] = useState(initialOverlay);
+  const {
+    imageUrl,
+    color,
+    overlay,
+    title,
+    titleColor,
+    titleSize,
+    titleAlignment,
+    titleFont,
+  } = props;
 
   const styles = {
     backgroundImage: `url(${imageUrl})`,
     backgroundColor: color,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    height: '65vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    height: "65vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   };
 
   const titleStyles = {
@@ -29,9 +32,11 @@ export default function Banner(props) {
 
   return (
     <div style={styles}>
-      <div className="background-container">
-        {overlay && <div className="overlay"><h1 style={titleStyles}>{title}</h1></div>}
-      </div>
+      {overlay && (
+        <div className="overlay">
+          <h1 style={titleStyles}>{title}</h1>
+        </div>
+      )}
     </div>
   );
 }
