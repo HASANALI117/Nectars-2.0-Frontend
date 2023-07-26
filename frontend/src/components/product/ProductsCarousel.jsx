@@ -84,9 +84,9 @@ export default function ProductsCarousel(props) {
 
   return (
     <div>
-      <div className="prod-title">
-<h1>{props.categoryTitle}</h1>
-</div>
+      <div className="prod-title" style={{ backgroundColor: props.catBgColor }}>
+        <h1 style={{ color: props.catFoColor }}>{props.categoryTitle}</h1>
+      </div>
       {isCarousel ? (
         <Carousel {...carouselProps}>{productCarousel}</Carousel>
       ) : (

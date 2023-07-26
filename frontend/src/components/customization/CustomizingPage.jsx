@@ -19,6 +19,7 @@ export default function CustomizingPage() {
     titleSize: "30px",
     titleAlignment: "center",
     titleFont: "Arial, sans-serif",
+    Vpos: "center",
   });
 
   const handleBannerUpdate = (updatedData) => {
@@ -68,11 +69,8 @@ export default function CustomizingPage() {
     bgColor: "black",
     showDots: false,
     categoryTitle: "category",
-    // textAlignTitle: "center",
-    // fontWeightTitle: "bold",
-    // isCenterTitle: true,
-    // isRightTitle: false,
-
+    catBgColor: "gray",
+    catFoColor: "white",
   });
 
   const handleProductUpdate = (updatedData) => {
@@ -86,7 +84,6 @@ export default function CustomizingPage() {
     margin: "20px",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
   };
-  
 
   return (
     <div>
@@ -101,16 +98,15 @@ export default function CustomizingPage() {
       <h2>Navbar</h2>
       <br></br>
 
-
       <div style={navBarContainerStyle}>
         <Navbar {...navBarData} />
       </div>
-  <NavBarUtilities navBarData={navBarData} onUpdate={handleNavBarUpdate} />
-  <br />
-       <h2>Banner</h2>
+      <NavBarUtilities navBarData={navBarData} onUpdate={handleNavBarUpdate} />
+      <br />
+      <h2>Banner</h2>
       <Banner {...bannerData} />
       <BannerUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} />
-        {/* <Banner {...bannerData} /> 
+      {/* <Banner {...bannerData} /> 
       </div> 
     </div> 
 
@@ -119,20 +115,18 @@ export default function CustomizingPage() {
         <Banner {...bannerData} />
       </div>
 */}
-     <h2>Product</h2>
+      <h2>Product</h2>
 
       <div style={productContainerStyle}>
-        <ProductsCarousel {...productData}/>
+        <ProductsCarousel {...productData} />
       </div>
-      <PUtilities productData={productData} onUpdate={handleProductUpdate}  />
+      <PUtilities productData={productData} onUpdate={handleProductUpdate} />
 
       {/* <ProductUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} />
       <div style={bannerContainerStyle}>
         <ProductsCarousel {...bannerData} />
 
     </div> */}
-
     </div>
-
   );
 }

@@ -33,7 +33,15 @@ export default function Banner(props) {
   return (
     <div style={styles}>
       {overlay && (
-        <div className="overlay">
+        <div
+          className="overlay"
+          style={{
+            display: "flex",
+            width: "100%",
+            flexDirection: "column",
+            justifyContent: props.Vpos,
+          }}
+        >
           <h1 style={titleStyles}>{title}</h1>
         </div>
       )}
