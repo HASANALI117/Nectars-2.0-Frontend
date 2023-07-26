@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Banner from "../banner/Banner";
 import BannerUtilities from "./banner/BannerUtilities";
 import NavBarUtilities from "./navbarSettings/NavBarUtilities";
-import Navbar from "../navbar/Navbar";
+import Navbar from "../navbar/NavBar";
 import ProductsCarousel from "../product/ProductsCarousel";
 import ProductUtilities from "./product/ProductUtilities";
 import PUtilities from "./product/PUtilities";
@@ -83,25 +83,48 @@ export default function CustomizingPage() {
 
   return (
     <div>
-      <h1>Customize your website</h1>
+      <h1 className="Customize-page">Customize your website</h1>
 
+      {/* <h2>Banner</h2>
+      <br></br>
+
+      <Banner {...bannerData} />
+      <BannerUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} /> */}
+      <br></br>
       <h2>Navbar</h2>
-      <NavBarUtilities navBarData={navBarData} onUpdate={handleNavBarUpdate} />
+      <br></br>
+
+
       <div style={navBarContainerStyle}>
         <Navbar {...navBarData} />
       </div>
-
-      <h2>Banner</h2>
+  <NavBarUtilities navBarData={navBarData} onUpdate={handleNavBarUpdate} />
+  <br />
+       <h2>Banner</h2>
+      <Banner {...bannerData} />
       <BannerUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} />
+        {/* <Banner {...bannerData} /> 
+      </div> 
+    </div> 
+
+
       <div style={bannerContainerStyle}>
         <Banner {...bannerData} />
       </div>
-
+*/}
       <h2>Product</h2>
+
       <PUtilities productData={productData} onUpdate={handleProductUpdate} />
       <div style={productContainerStyle}>
         <ProductsCarousel {...productData} />
       </div>
+
+      <ProductUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} />
+      <div style={bannerContainerStyle}>
+        <ProductsCarousel {...bannerData} />
+
     </div>
+    </div>
+
   );
 }
