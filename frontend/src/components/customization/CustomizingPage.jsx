@@ -51,19 +51,30 @@ export default function CustomizingPage() {
 
   return (
     <div>
-      <h1>Customize your website</h1>
+      <h1 className="Customize-page">Customize your website</h1>
 
+      <h2>Banner</h2>
+      <br></br>
+
+      <Banner {...bannerData} />
+      <BannerUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} />
+      <br></br>
       <h2>Navbar</h2>
-      <NavBarUtilities navBarData={navBarData} onUpdate={handleNavBarUpdate} />
+      <br></br>
+
+
       <div style={navBarContainerStyle}>
         <NavBar {...navBarData} />
       </div>
-
-      <h2>Banner</h2>
+  <NavBarUtilities navBarData={navBarData} onUpdate={handleNavBarUpdate} />
+      {/* <h2>Banner</h2>
+      <h1 className="Customize-page">Customize your website</h1>
+      <Banner {...bannerData} />
       <BannerUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} />
-      <div style={bannerContainerStyle}>
-        <Banner {...bannerData} />
-      </div>
-    </div>
+      <div>
+        {/* <Banner {...bannerData} /> 
+      </div> */}
+    </div> 
+
   );
 }
