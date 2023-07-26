@@ -19,6 +19,7 @@ export default function CustomizingPage() {
     titleSize: "30px",
     titleAlignment: "center",
     titleFont: "Arial, sans-serif",
+    Vpos: "center",
   });
 
   const handleBannerUpdate = (updatedData) => {
@@ -67,6 +68,9 @@ export default function CustomizingPage() {
     isCarousel: false,
     bgColor: "black",
     showDots: false,
+    categoryTitle: "category",
+    catBgColor: "gray",
+    catFoColor: "white",
   });
 
   const handleProductUpdate = (updatedData) => {
@@ -94,16 +98,15 @@ export default function CustomizingPage() {
       <h2>Navbar</h2>
       <br></br>
 
-
       <div style={navBarContainerStyle}>
         <Navbar {...navBarData} />
       </div>
-  <NavBarUtilities navBarData={navBarData} onUpdate={handleNavBarUpdate} />
-  <br />
-       <h2>Banner</h2>
+      <NavBarUtilities navBarData={navBarData} onUpdate={handleNavBarUpdate} />
+      <br />
+      <h2>Banner</h2>
       <Banner {...bannerData} />
       <BannerUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} />
-        {/* <Banner {...bannerData} /> 
+      {/* <Banner {...bannerData} /> 
       </div> 
     </div> 
 
@@ -114,17 +117,16 @@ export default function CustomizingPage() {
 */}
       <h2>Product</h2>
 
-      <PUtilities productData={productData} onUpdate={handleProductUpdate} />
       <div style={productContainerStyle}>
         <ProductsCarousel {...productData} />
       </div>
+      <PUtilities productData={productData} onUpdate={handleProductUpdate} />
 
-      <ProductUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} />
+      {/* <ProductUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} />
       <div style={bannerContainerStyle}>
         <ProductsCarousel {...bannerData} />
 
+    </div> */}
     </div>
-    </div>
-
   );
 }
