@@ -41,7 +41,7 @@ const SignUpPage = () => {
                     console.log(response.data);
                     localStorage.setItem('access', response.data.access);
                     localStorage.setItem('refresh', response.data.refresh);
-                    // window.location.href = "/dashboard";
+                    // window.location.href = "/";
                 
             }
             )

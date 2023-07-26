@@ -51,7 +51,7 @@ export const Home = () => {
             Login
           </Navbar.Link>
           <Navbar.Item>
-            <Button auto flat as={Link} href="#">
+            <Button auto flat as={Link} href="/signup">
               Sign Up
             </Button>
           </Navbar.Item>
