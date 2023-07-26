@@ -33,9 +33,9 @@ export default function ProductsCarousel(props) {
     responsive: responsive,
   });
 
-  useEffect(() => {
-    console.log(props);
-  }, [props]);
+  // useEffect(() => {
+  //   console.log(props);
+  // }, [props]);
 
   const handleIsCarousel = () => {
     setIsCarousel(props.isCarousel);

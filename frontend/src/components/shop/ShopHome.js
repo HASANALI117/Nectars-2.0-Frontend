@@ -24,13 +24,19 @@ export default function ShopHome() {
 
   const [productData, setProductData] = useState({
     color: "white",
-    // title: "Product Name",
     fontSize: "1rem",
-    // price: "$400",
     noOfCards: "5",
     isCarousel: true,
     bgColor: "gray",
     showDots: false,
+  });
+
+  const [navBarData, setNavBarData] = useState({
+    variant: "default",
+    activeColor: "secondary",
+    signupColor: "secondary",
+    loginColor: "secondary",
+    buttonColor: "primary",
   });
 
   useEffect(() => {
@@ -75,7 +81,7 @@ export default function ShopHome() {
   useEffect(() => {
     if (shopCategories.length > 0) {
       const categories = shopCategories.sort(() => Math.random() - 0.5);
-      console.log(categories);
+      // console.log(categories);
       const requests = categories.map((category) =>
         axios.get(
           `${BACKEND_URL}/products/search/?shopId=${shopId}&filter=${category.categoryId}`
@@ -85,7 +91,7 @@ export default function ShopHome() {
       Promise.all(requests)
         .then((res) => {
           for (let i = 0; i < res.length; i++) {
-            console.log(res[i].data);
+            // console.log(res[i].data);
             setShopProducts((prev) => [
               ...prev,
               { category: categories[i].name, products: res[i].data },
@@ -124,7 +130,7 @@ export default function ShopHome() {
         <div>Loading...</div>
       ) : (
         <div>
-          <Navbar brand={shopName} dropdownColor="success" />
+          <Navbar brand={shopName} {...shopProps.navbar} />
           <Banner {...bannerData} />
           {isLoadingProducts ? (
             <div>Loading...</div>
@@ -133,7 +139,7 @@ export default function ShopHome() {
               <ProductsCarousel
                 categoryTitle={products.category}
                 productList={products.products}
-                {...productData}
+                {...shopProps.carousel}
               />
             ))
           )}

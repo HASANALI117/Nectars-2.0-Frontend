@@ -5,7 +5,7 @@ import ProductDetails from "./ProductDetails";
 
 function ProductCard(props) {
   const [showProductDetails, setShowProductDetails] = useState(false);
-  console.log(props);
+  // console.log(props);
   const handleProductDetails = () => {
     setShowProductDetails(!showProductDetails);
   };
