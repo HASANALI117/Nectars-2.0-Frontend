@@ -14,45 +14,34 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import { SketchPicker } from "react-color";
 
-export default function ProductUtilities(props) {
+export default function ProductUtilities({ productData, onUpdate }) {
   const [color, setColor] = useState("#0000ff");
+  const [isCarousel, setIsCarousel] = useState(productData.isCarousel);
 
   const handleColorChange = (updatedColor) => {
     setColor(updatedColor.hex);
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    onUpdate({ ...productData, [name]: value });
+  };
+
+  const handleTrueClick = () => {
+    setIsCarousel(true);
+    console.log(isCarousel);
+    onUpdate({ ...productData, [isCarousel]: isCarousel });
+  };
+
+  const handleFalseClick = () => {
+    setIsCarousel(false);
+    console.log(isCarousel);
   };
 
   useEffect(() => {
     console.log(color);
   }, [color]);
 
-  const CustomMenu = React.forwardRef(
-    ({ children, style, className, "aria-labelledby": labeledBy }, ref) => {
-      const [value, setValue] = useState("");
-
-      return (
-        <div
-          ref={ref}
-          style={style}
-          className={className}
-          aria-labelledby={labeledBy}
-        >
-          <Form.Control
-            autoFocus
-            className="mx-3 my-2 w-auto"
-            placeholder="Type to filter..."
-            onChange={(e) => setValue(e.target.value)}
-            value={value}
-          />
-          <ul className="list-unstyled">
-            {React.Children.toArray(children).filter(
-              (child) =>
-                !value || child.props.children.toLowerCase().startsWith(value)
-            )}
-          </ul>
-        </div>
-      );
-    }
-  );
   const carouselUtilities = [
     {
       Infinite: {
@@ -150,8 +139,8 @@ export default function ProductUtilities(props) {
         icon: <MdViewCarousel />,
         Dropdownitem: (
           <div>
-            <Dropdown.Item>True</Dropdown.Item>
-            <Dropdown.Item>False</Dropdown.Item>
+            <Dropdown.Item onClick={handleTrueClick}>True</Dropdown.Item>
+            <Dropdown.Item onClick={handleFalseClick}>False</Dropdown.Item>
           </div>
         ),
       },
@@ -166,7 +155,12 @@ export default function ProductUtilities(props) {
         Dropdownitem: (
           <div>
             <Dropdown.Item>
-              <input type="text"></input>
+              <input
+                type="text"
+                name="noOfCards"
+                value={productData.noOfCards}
+                onChange={handleInputChange}
+              ></input>
             </Dropdown.Item>
           </div>
         ),

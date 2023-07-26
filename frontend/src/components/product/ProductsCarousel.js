@@ -33,6 +33,10 @@ export default function ProductsCarousel(props) {
     responsive: responsive,
   });
 
+  useEffect(() => {
+    console.log(props);
+  }, [props]);
+
   const handleIsCarousel = () => {
     setIsCarousel(props.isCarousel);
   };
@@ -44,13 +48,13 @@ export default function ProductsCarousel(props) {
   const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const product = [];
-  for (let i = 0; i < list.length; i += 5) {
+  for (let i = 0; i < list.length; i += props.noOfCards) {
     const row = (
-      <Row xs={2} md={4} lg={5} key={i}>
-        {list.slice(i, i + 5).map((item) => (
+      <Row xs={2} md={4} lg={props.noOfCards} key={i}>
+        {list.slice(i, i + props.noOfCards).map((item) => (
           <Col key={item}>
             <div style={{ display: "flex" }}>
-              <ProductCard bgColor={"red"} color={"black"} />
+              <ProductCard {...props} />
             </div>
           </Col>
         ))}
@@ -60,13 +64,28 @@ export default function ProductsCarousel(props) {
   }
 
   const productCarousel = list.map((item) => {
-    return <ProductCard bgColor={"red"} color={"black"} />;
+    return <ProductCard {...props} />;
   });
+
+  const carouselProps = {
+    swipeable: true,
+    draggable: false,
+    showDots: props.showDots,
+    responsive: responsive,
+    ssr: true,
+    infinite: true,
+    keyBoardControl: true,
+    transitionDuration: 500,
+    containerClass: "carousel-container",
+    removeArrowOnDeviceType: ["tablet", "mobile"],
+    dotListClass: "custom-dot-list-style",
+    itemClass: "carousel-item-padding-40-px",
+  };
 
   return (
     <div>
       {isCarousel ? (
-        <Carousel {...carouselCustomize}>{productCarousel}</Carousel>
+        <Carousel {...carouselProps}>{productCarousel}</Carousel>
       ) : (
         product
       )}
