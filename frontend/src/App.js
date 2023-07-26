@@ -26,7 +26,7 @@ function App() {
   }, []);
   return (
     <>
-      <Router>
+      
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUpPage />} />
@@ -41,7 +41,7 @@ function App() {
           <Route path="/fileTest" element={<FileUpload />} />
           <Route path="/Test" element={<ProductUtilities />} />
         </Routes>
-      </Router>
+      
     </>
   );
 }
