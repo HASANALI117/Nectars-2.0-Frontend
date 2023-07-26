@@ -67,6 +67,12 @@ export default function CustomizingPage() {
     isCarousel: false,
     bgColor: "black",
     showDots: false,
+    categoryTitle: "category",
+    // textAlignTitle: "center",
+    // fontWeightTitle: "bold",
+    // isCenterTitle: true,
+    // isRightTitle: false,
+
   });
 
   const handleProductUpdate = (updatedData) => {
@@ -80,6 +86,7 @@ export default function CustomizingPage() {
     margin: "20px",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
   };
+  
 
   return (
     <div>
@@ -112,18 +119,19 @@ export default function CustomizingPage() {
         <Banner {...bannerData} />
       </div>
 */}
-      <h2>Product</h2>
+     <h2>Product</h2>
 
-      <PUtilities productData={productData} onUpdate={handleProductUpdate} />
       <div style={productContainerStyle}>
-        <ProductsCarousel {...productData} />
+        <ProductsCarousel {...productData}/>
       </div>
+      <PUtilities productData={productData} onUpdate={handleProductUpdate}  />
 
-      <ProductUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} />
+      {/* <ProductUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} />
       <div style={bannerContainerStyle}>
         <ProductsCarousel {...bannerData} />
 
-    </div>
+    </div> */}
+
     </div>
 
   );

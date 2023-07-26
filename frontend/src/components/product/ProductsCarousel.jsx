@@ -84,6 +84,9 @@ export default function ProductsCarousel(props) {
 
   return (
     <div>
+      <div className="prod-title">
+<h1>{props.categoryTitle}</h1>
+</div>
       {isCarousel ? (
         <Carousel {...carouselProps}>{productCarousel}</Carousel>
       ) : (

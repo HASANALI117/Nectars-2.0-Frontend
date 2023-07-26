@@ -615,3 +615,14 @@ button[type="submit"]:hover {
     margin-left: 17%;
     margin-top: 2%;
 }
+
+.prod-title {
+    background-color: rgb(62, 62, 62);
+    width: 100%;
+    height: 67px;
+    color: white;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
