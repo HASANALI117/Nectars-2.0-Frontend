@@ -107,6 +107,7 @@ export default function ProductsCarousel(props) {
           style={{
             display: "flex",
             flexDirection: "row",
+            flexWrap: "wrap",
             // justifyContent: "space-around",
           }}
         >

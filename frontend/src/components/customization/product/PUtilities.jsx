@@ -17,6 +17,15 @@ const PUtilities = ({ productData, onUpdate }) => {
     onUpdate({ ...productData, [name]: value });
   };
 
+  const handleBooleanInputChange = (event) => {
+    const { name, value } = event.target;
+    if (value === "true") {
+      onUpdate({ ...productData, [name]: true });
+    } else {
+      onUpdate({ ...productData, [name]: false });
+    }
+  };
+
   return (
     <div style={styles.container}>
       <h3>Banner Customization</h3>
@@ -72,32 +81,6 @@ const PUtilities = ({ productData, onUpdate }) => {
         <div style={styles.verticalLine}></div>
         <div style={styles.inputGroup}>
           <label style={styles.icon}>
-            <FaFont /> Title:
-          </label>
-          <input
-            style={styles.input}
-            type="text"
-            name="title"
-            value={productData.title}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div style={styles.verticalLine}></div>
-        <div style={styles.inputGroup}>
-          <label style={styles.icon}>
-            <FaFont /> Price:
-          </label>
-          <input
-            style={styles.input}
-            type="text"
-            name="price"
-            value={productData.price}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div style={styles.verticalLine}></div>
-        <div style={styles.inputGroup}>
-          <label style={styles.icon}>
             <FaPalette /> Font Color:
           </label>
           {/* <input
@@ -128,23 +111,7 @@ const PUtilities = ({ productData, onUpdate }) => {
           />
         </div>
         <div style={styles.verticalLine}></div>
-        <div style={styles.inputGroup}>
-          <label style={styles.icon}>No. of Cards:</label>
-          <select
-            style={styles.select}
-            name="noOfCards"
-            value={productData.noOfCards}
-            onChange={handleInputChange}
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        </div>
-        <div style={styles.verticalLine}></div>
-        <div style={styles.inputGroup}>
+        {/* <div style={styles.inputGroup}>
           <label style={styles.icon}>Carousel:</label>
           <input
             style={styles.checkbox}
@@ -153,6 +120,18 @@ const PUtilities = ({ productData, onUpdate }) => {
             value={productData.isCarousel}
             onChange={handleInputChange}
           />
+        </div> */}
+        <div style={styles.inputGroup}>
+          <FaAlignLeft style={styles.icon} />
+          <select
+            name="isCarousel"
+            value={productData.isCarousel}
+            onChange={handleBooleanInputChange}
+            style={styles.select}
+          >
+            <option value={true}>Carousel</option>
+            <option value={false}>Grid</option>
+          </select>
         </div>
         <div style={styles.verticalLine}></div>
         <div style={styles.inputGroup}>
