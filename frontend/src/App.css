@@ -594,24 +594,24 @@ button[type="submit"]:hover {
 
 .Customize-page {
     text-align: center;
-
-.signinCard{
-  width: 29% !important;
-  margin-left: 70% !important;
-  margin-top: 2% !important;
-  
 }
 
-.signinCardHead{
-  margin-left: 40%;
-  font-weight: bold;
+.signinCard {
+    width: 29% !important;
+    margin-left: 70% !important;
+    margin-top: 2% !important;
 }
 
-.signinInput{
-  margin: 3px;
+.signinCardHead {
+    margin-left: 40%;
+    font-weight: bold;
 }
 
-.link{
-  margin-left: 17%;
-  margin-top: 2%;
+.signinInput {
+    margin: 3px;
+}
+
+.link {
+    margin-left: 17%;
+    margin-top: 2%;
 }

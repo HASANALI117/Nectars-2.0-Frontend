@@ -55,11 +55,11 @@ export default function CustomizingPage() {
     <div>
       <h1 className="Customize-page">Customize your website</h1>
 
-      <h2>Banner</h2>
+      {/* <h2>Banner</h2>
       <br></br>
 
       <Banner {...bannerData} />
-      <BannerUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} />
+      <BannerUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} /> */}
       <br></br>
       <h2>Navbar</h2>
       <br></br>
@@ -69,25 +69,24 @@ export default function CustomizingPage() {
         <Navbar {...navBarData} />
       </div>
   <NavBarUtilities navBarData={navBarData} onUpdate={handleNavBarUpdate} />
-      {/* <h2>Banner</h2>
-      <h1 className="Customize-page">Customize your website</h1>
+  <br />
+       <h2>Banner</h2>
       <Banner {...bannerData} />
       <BannerUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} />
-      <div>
         {/* <Banner {...bannerData} /> 
-      </div> */}
+      </div> 
     </div> 
 
 
       <div style={bannerContainerStyle}>
         <Banner {...bannerData} />
       </div>
-
+*/}
       <h2>Product</h2>
       <ProductUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} />
       <div style={bannerContainerStyle}>
         <ProductsCarousel {...bannerData} />
-      </div>
+    </div>
     </div>
 
   );
