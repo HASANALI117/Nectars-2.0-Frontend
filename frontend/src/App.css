@@ -595,3 +595,24 @@ button[type="submit"]:hover {
 .selectcolor {
   padding: 5px;
 }
+
+.signinCard{
+  width: 29% !important;
+  margin-left: 70% !important;
+  margin-top: 2% !important;
+  
+}
+
+.signinCardHead{
+  margin-left: 40%;
+  font-weight: bold;
+}
+
+.signinInput{
+  margin: 3px;
+}
+
+.link{
+  margin-left: 17%;
+  margin-top: 2%;
+}
