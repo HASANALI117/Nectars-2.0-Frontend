@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Banner from "../banner/Banner";
 import BannerUtilities from "./banner/BannerUtilities";
 import NavBarUtilities from "./navbarSettings/NavBarUtilities";
-import Navbar from "../navbar/Navbar";
+import Navbar from "../navbar/NavBar";
 import ProductsCarousel from "../product/ProductsCarousel";
 import ProductUtilities from "./product/ProductUtilities";
 
