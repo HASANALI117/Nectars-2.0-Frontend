@@ -26,22 +26,20 @@ function App() {
   }, []);
   return (
     <>
-      
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/shopinfo" element={<ShopInfo />} />
-          <Route path="/customization" element={<CustomizingPage />} />
-          <Route path="/:shopName/" element={<ShopHome />} />
-          <Route path="/:shopName/home" element={<ShopHome />} />
-          <Route
-            path="/:shopName/dashboard"
-            element={isAuth ? <Dashboard /> : <RedirectedSignin />}
-          />
-          <Route path="/fileTest" element={<FileUpload />} />
-          <Route path="/Test" element={<ProductUtilities />} />
-        </Routes>
-      
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/shopinfo" element={<ShopInfo />} />
+        <Route path="/customization" element={<CustomizingPage />} />
+        <Route path="/:shopName/" element={<ShopHome />} />
+        <Route path="/:shopName/home" element={<ShopHome />} />
+        <Route
+          path="/:shopName/dashboard"
+          element={isAuth ? <Dashboard /> : <RedirectedSignin />}
+        />
+        <Route path="/fileTest" element={<FileUpload />} />
+        {/* <Route path="/Test" element={<ProductUtilities />} /> */}
+      </Routes>
     </>
   );
 }

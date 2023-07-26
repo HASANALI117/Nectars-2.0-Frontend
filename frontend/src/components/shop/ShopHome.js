@@ -10,12 +10,28 @@ import Banner from "../banner/Banner";
 import { useState } from "react";
 import axios from "axios";
 import BACKEND_URL from "../../constants";
+import ProductsCarousel from "../product/ProductsCarousel";
 
 export default function ShopHome() {
   const { shopName } = useParams();
   const [shopId, setShopId] = useState();
   const [shopOwnerId, setShopOwnerId] = useState();
   const [shopProps, setShopProps] = useState({});
+  const [isLoadingShopId, setIsLoadingShopId] = useState(true);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
+  const [shopCategories, setShopCategories] = useState([]);
+  const [shopProducts, setShopProducts] = useState([]);
+
+  const [productData, setProductData] = useState({
+    color: "white",
+    // title: "Product Name",
+    fontSize: "1rem",
+    // price: "$400",
+    noOfCards: "5",
+    isCarousel: true,
+    bgColor: "gray",
+    showDots: false,
+  });
 
   useEffect(() => {
     axios
@@ -24,16 +40,6 @@ export default function ShopHome() {
         console.log(res.data);
         setShopId(res.data[0].shopId);
         setShopOwnerId(res.data[0].shopOwner);
-
-        axios
-          .get(`${BACKEND_URL}/shops/${res.data[0].shopId}/props/`)
-          .then((res) => {
-            console.log(res.data);
-            setShopProps(res.data[0].props);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
       })
       .catch((err) => {
         console.log(err);
@@ -41,8 +47,63 @@ export default function ShopHome() {
   }, []);
 
   useEffect(() => {
-    console.log("props", shopProps);
-  }, [shopProps]);
+    if (shopId) {
+      axios
+        .get(`${BACKEND_URL}/shops/${shopId}/props/`)
+        .then((res) => {
+          console.log(res.data);
+          setShopProps(res.data[0].props);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      axios
+        .get(`${BACKEND_URL}/categories/shop/${shopId}/`)
+        .then((res) => {
+          console.log(res.data);
+          setShopCategories(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    setIsLoadingShopId(false);
+  }, [shopId]);
+
+  useEffect(() => {
+    if (shopCategories.length > 0) {
+      const categories = shopCategories.sort(() => Math.random() - 0.5);
+      console.log(categories);
+      const requests = categories.map((category) =>
+        axios.get(
+          `${BACKEND_URL}/products/search/?shopId=${shopId}&filter=${category.categoryId}`
+        )
+      );
+
+      Promise.all(requests)
+        .then((res) => {
+          for (let i = 0; i < res.length; i++) {
+            console.log(res[i].data);
+            setShopProducts((prev) => [
+              ...prev,
+              { category: categories[i].name, products: res[i].data },
+            ]);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [shopCategories]);
+
+  useEffect(() => {
+    if (shopProducts.length > 0) {
+      setIsLoadingProducts(false);
+      console.log("products:", shopProducts);
+    }
+  }, [shopProducts]);
 
   // const bannerData = {
   //   imageUrl:
@@ -59,8 +120,25 @@ export default function ShopHome() {
 
   return (
     <NextUIProvider>
-      <Navbar brand={shopName} dropdownColor="success" />
-      <Banner {...bannerData} />
+      {isLoadingShopId ? (
+        <div>Loading...</div>
+      ) : (
+        <div>
+          <Navbar brand={shopName} dropdownColor="success" />
+          <Banner {...bannerData} />
+          {isLoadingProducts ? (
+            <div>Loading...</div>
+          ) : (
+            shopProducts.map((products, index) => (
+              <ProductsCarousel
+                categoryTitle={products.category}
+                productList={products.products}
+                {...productData}
+              />
+            ))
+          )}
+        </div>
+      )}
 
       {/* <ProductCard
         name="Product Name"

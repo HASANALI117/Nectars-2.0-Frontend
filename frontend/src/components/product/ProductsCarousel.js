@@ -47,24 +47,36 @@ export default function ProductsCarousel(props) {
 
   const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  const product = [];
-  for (let i = 0; i < list.length; i += props.noOfCards) {
-    const row = (
-      <Row xs={2} md={4} lg={props.noOfCards} key={i}>
-        {list.slice(i, i + props.noOfCards).map((item) => (
-          <Col key={item}>
-            <div style={{ display: "flex" }}>
-              <ProductCard {...props} />
-            </div>
-          </Col>
-        ))}
-      </Row>
-    );
-    product.push(row);
-  }
+  // const product = [];
+  // for (let i = 0; i < list.length; i += props.noOfCards) {
+  //   const row = (
+  //     <Row xs={2} md={4} lg={props.noOfCards} key={i}>
+  //       {props.productList.slice(i, i + props.noOfCards).map((item) => (
+  //         <Col key={item}>
+  //           <div style={{ display: "flex" }}>
+  //             <ProductCard
+  //               imageUrl={product.poster_image_url}
+  //               title={props.name}
+  //               price={props.price}
+  //               {...props}
+  //             />
+  //           </div>
+  //         </Col>
+  //       ))}
+  //     </Row>
+  //   );
+  //   product.push(row);
+  // }
 
-  const productCarousel = list.map((item) => {
-    return <ProductCard {...props} />;
+  const productCarousel = props.productList.map((product) => {
+    return (
+      <ProductCard
+        imageUrl={product.poster_image_url} //added this
+        title={product.name} //added this
+        price={product.price} //added this
+        {...props}
+      />
+    );
   });
 
   const carouselProps = {
@@ -84,10 +96,20 @@ export default function ProductsCarousel(props) {
 
   return (
     <div>
+      <h1>{props.categoryTitle}</h1> {/* added this */}
       {isCarousel ? (
         <Carousel {...carouselProps}>{productCarousel}</Carousel>
       ) : (
-        product
+        // changed this for isCarousel false
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            // justifyContent: "space-around",
+          }}
+        >
+          {productCarousel}
+        </div>
       )}
     </div>
   );
