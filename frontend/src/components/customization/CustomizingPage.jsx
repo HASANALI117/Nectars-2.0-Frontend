@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import Banner from "../banner/Banner";
 import BannerUtilities from "./banner/BannerUtilities";
 import NavBarUtilities from "./navbarSettings/NavBarUtilities";
-import NavBar from "../navbar/NavBar";
+import Navbar from "../navbar/NavBar";
+import ProductsCarousel from "../product/ProductsCarousel";
+import ProductUtilities from "./product/ProductUtilities";
 
 export default function CustomizingPage() {
   const [bannerData, setBannerData] = useState({
@@ -64,7 +66,7 @@ export default function CustomizingPage() {
 
 
       <div style={navBarContainerStyle}>
-        <NavBar {...navBarData} />
+        <Navbar {...navBarData} />
       </div>
   <NavBarUtilities navBarData={navBarData} onUpdate={handleNavBarUpdate} />
       {/* <h2>Banner</h2>
@@ -75,6 +77,18 @@ export default function CustomizingPage() {
         {/* <Banner {...bannerData} /> 
       </div> */}
     </div> 
+
+
+      <div style={bannerContainerStyle}>
+        <Banner {...bannerData} />
+      </div>
+
+      <h2>Product</h2>
+      <ProductUtilities bannerData={bannerData} onUpdate={handleBannerUpdate} />
+      <div style={bannerContainerStyle}>
+        <ProductsCarousel {...bannerData} />
+      </div>
+    </div>
 
   );
 }

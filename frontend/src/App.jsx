@@ -13,9 +13,11 @@ import CustomizingPage from "./components/customization/CustomizingPage";
 import FileUpload from "./components/test/FileUpload";
 import { useEffect, useState } from "react";
 import RedirectedSignin from "./components/RedirectedSignin";
+import ProductUtilities from "./components/customization/product/ProductUtilities";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
+
   useEffect(() => {
     const token = localStorage.getItem("access");
     if (token) {
@@ -37,6 +39,7 @@ function App() {
             element={isAuth ? <Dashboard /> : <RedirectedSignin />}
           />
           <Route path="/fileTest" element={<FileUpload />} />
+          <Route path="/Test" element={<ProductUtilities />} />
         </Routes>
       </Router>
     </>
