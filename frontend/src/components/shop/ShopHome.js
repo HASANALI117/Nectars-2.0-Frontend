@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProductCard from "../../components/product/ProductCard";
 import { NextUIProvider } from "@nextui-org/react";
-import Navbar from "../navbar/Navbar";
+import Navbar from "../navbar/NavBar";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import NavbarSettings from "../customization/navbarSettings/NavbarSettings";

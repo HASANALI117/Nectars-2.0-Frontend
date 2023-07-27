@@ -19,7 +19,7 @@ export default function SignUp(props) {
   }, [data]);
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     console.log(data);
     axios
       .post(`${BACKEND_URL}/api/auth/users/`, data)
@@ -100,7 +100,7 @@ export default function SignUp(props) {
             auto
             color={props.buttonColor}
             style={{ marginTop: "1rem" }}
-            onSubmit={handleSubmit}
+            onClick={handleSubmit}
           >
             Sign Up
           </Button>
