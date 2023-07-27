@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProductCard from "../../components/product/ProductCard";
 import { NextUIProvider } from "@nextui-org/react";
-import Navbar from "../navbar/NavBar";
+import Navbar from "../navbar/Navbar";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import NavbarSettings from "../customization/navbarSettings/NavbarSettings";
@@ -130,7 +130,7 @@ export default function ShopHome() {
         <div>Loading...</div>
       ) : (
         <div>
-          <Navbar brand={shopName} {...shopProps.navbar} />
+          <Navbar brand={shopName} {...shopProps.navbar} shopId={shopId} />
           <Banner {...bannerData} />
           {isLoadingProducts ? (
             <div>Loading...</div>

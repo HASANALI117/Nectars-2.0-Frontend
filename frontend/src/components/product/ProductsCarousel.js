@@ -75,6 +75,7 @@ export default function ProductsCarousel(props) {
         title={product.name} //added this
         price={product.price} //added this
         {...props}
+        productId={product.productId}
       />
     );
   });
