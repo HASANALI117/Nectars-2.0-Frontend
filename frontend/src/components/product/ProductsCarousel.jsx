@@ -97,7 +97,9 @@ export default function ProductsCarousel(props) {
 
   return (
     <div>
-      <h1>{props.categoryTitle}</h1> {/* added this */}
+      <div className="prod-title" style={{ backgroundColor: props.catBgColor }}>
+        <h1 style={{ color: props.catFoColor }}>{props.categoryTitle}</h1>
+      </div>
       {isCarousel ? (
         <Carousel {...carouselProps}>{productCarousel}</Carousel>
       ) : (
@@ -106,6 +108,7 @@ export default function ProductsCarousel(props) {
           style={{
             display: "flex",
             flexDirection: "row",
+            flexWrap: "wrap",
             // justifyContent: "space-around",
           }}
         >

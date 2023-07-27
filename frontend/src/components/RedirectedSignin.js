@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
 import BACKEND_URL from "../constants";
+// import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const RedirectedSignin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const { shopName } = useParams();
+
+  const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -18,6 +25,8 @@ const RedirectedSignin = () => {
       // Save access and refresh tokens to local storage
       localStorage.setItem("access", response.data.access);
       localStorage.setItem("refresh", response.data.refresh);
+
+      navigate(`/shop/${shopName}/dashboard`);
 
       // Redirect to the authenticated area or update the app state to reflect the user's authentication status
       // For example, you can set a state variable here to indicate that the user is authenticated, and use it to conditionally render components that require authentication.

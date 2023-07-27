@@ -30,11 +30,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/shopinfo" element={<ShopInfo />} />
-        <Route path="/customization" element={<CustomizingPage />} />
-        <Route path="/:shopName/" element={<ShopHome />} />
-        <Route path="/:shopName/home" element={<ShopHome />} />
+        <Route path="/customization/:shopId" element={<CustomizingPage />} />
+        <Route path="/shop/:shopName/" element={<ShopHome />} />
         <Route
-          path="/:shopName/dashboard"
+          path="/shop/:shopName/dashboard"
           element={isAuth ? <Dashboard /> : <RedirectedSignin />}
         />
         <Route path="/fileTest" element={<FileUpload />} />
