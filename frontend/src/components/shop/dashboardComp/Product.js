@@ -22,8 +22,13 @@ export default function Product(props) {
       })
       .then((response) => {
         console.log("response.data", response.data);
-        setCategory(response.data[0].categoryId);
-        setCategories(response.data);
+        if (response.data.length > 0) {
+          setCategory(response.data[0].categoryId);
+          setCategories(response.data);
+        } else {
+          setCategory(null);
+          setCategories([]);
+        }
       });
   }, []);
 
