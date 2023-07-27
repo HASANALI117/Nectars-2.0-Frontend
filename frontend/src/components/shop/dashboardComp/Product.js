@@ -22,12 +22,12 @@ export default function Product(props) {
       })
       .then((response) => {
         console.log("response.data", response.data);
-        if (response.data.length > 0) {
-          setCategory(response.data[0].categoryId);
-          setCategories(response.data);
-        } else {
+        if (response.data.length === 0) {
           setCategory(null);
           setCategories([]);
+        } else {
+          setCategory(response.data[0].categoryId);
+          setCategories(response.data);
         }
       });
   }, []);

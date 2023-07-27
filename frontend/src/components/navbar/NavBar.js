@@ -12,12 +12,12 @@ import {
 import { SearchIcon } from "./Searchicon.js";
 import { CSSTransition } from "react-transition-group";
 import Cart from "./Cart.jsx";
+import SignUp from "./SignUp.js";
 
 export default function NavBar(props) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
-
   const [showSignInCard, setShowSignInCard] = useState(false);
   const [showSignUpCard, setShowSignUpCard] = useState(false);
   const [username, setUsername] = useState("");
@@ -30,8 +30,8 @@ export default function NavBar(props) {
   }
 
   useEffect(() => {
-    console.log(`email: ${email} username: ${username} password: ${password}`);
-  }, [email, username, password]);
+    console.log(props);
+  }, []);
 
   function handleLogin() {
     setShowSignInCard(true);
@@ -61,6 +61,13 @@ export default function NavBar(props) {
     setShowCart(!showCart);
     setIsButtonClicked(true);
   };
+
+  const handleShowSignUp = () => {
+    console.log("signup component");
+    setShowSignUpCard(!showSignUpCard);
+    setIsButtonClicked(true);
+  };
+
   return (
     <>
       <Navbar isBordered variant="sticky">
@@ -99,7 +106,7 @@ export default function NavBar(props) {
               Cart
             </Button>
             <CSSTransition in={showCart} timeout={50} unmountOnExit>
-              <Cart detailsCustom={props} />
+              <Cart />
             </CSSTransition>
           </Navbar.Content>
         </Navbar.Brand>
@@ -189,7 +196,7 @@ export default function NavBar(props) {
                   as={Link}
                   href="#"
                   color={props.signupColor}
-                  onClick={handleSignUp}
+                  onClick={handleShowSignUp}
                 >
                   Sign Up
                 </Button>
@@ -250,70 +257,7 @@ export default function NavBar(props) {
           </Card.Body>
         </Card>
       )}
-      {showSignUpCard && (
-        <Card className="signinCard">
-          <Button
-            auto
-            text
-            style={{
-              position: "absolute",
-              top: "0.5rem",
-              right: "0.5rem",
-              color: "black",
-              border: "none",
-              cursor: "pointer",
-              backgroundColor: "transparent",
-            }}
-            onClick={handleCloseSignIn}
-          >
-            {/* 🆇 */}
-            🅇
-          </Button>
-          <Card.Header className="signinCardHead">Sign Up</Card.Header>
-          <Card.Body>
-            <Input
-              className="signinInput"
-              clearable
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-
-            <Input
-              className="signinInput"
-              clearable
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-
-            <Input.Password
-              className="signinInput"
-              clearable
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-
-            <Button
-              onClick={handleSignIn}
-              auto
-              color={props.buttonColor}
-              style={{ marginTop: "1rem" }}
-            >
-              Sign Up
-            </Button>
-            <Link
-              className="link"
-              color="text"
-              href="#"
-              onClick={() => setShowSignUpCard(false)}
-            >
-              Already have an account? Sign In
-            </Link>
-          </Card.Body>
-        </Card>
-      )}
+      {showSignUpCard && <SignUp shopId={props.shopId} />}
     </>
   );
 }

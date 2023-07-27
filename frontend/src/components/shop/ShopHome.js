@@ -130,7 +130,7 @@ export default function ShopHome() {
         <div>Loading...</div>
       ) : (
         <div>
-          <Navbar brand={shopName} {...shopProps.navbar} />
+          <Navbar brand={shopName} {...shopProps.navbar} shopId={shopId} />
           <Banner {...bannerData} />
           {isLoadingProducts ? (
             <div>Loading...</div>

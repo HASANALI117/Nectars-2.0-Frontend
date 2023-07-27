@@ -4,139 +4,202 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import axios from "axios";
+import BACKEND_URL from "../../constants";
 
 export default function Cart(props) {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Burger",
-      price: 100,
-      quantity: 1,
-      image:
-        "https://www.thecookierookie.com/wp-content/uploads/2023/04/featured-stovetop-burgers-recipe.jpg",
-    },
-    {
-      id: 2,
-      name: "Pizza",
-      price: 200,
-      quantity: 1,
-      image:
-        "https://www.simplyrecipes.com/thmb/I4razizFmeF8ua2jwuD0Pq4XpP8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2019__09__easy-pepperoni-pizza-lead-4-82c60893fcad4ade906a8a9f59b8da9d.jpg",
-    },
-    {
-      id: 3,
-      name: "Pasta",
-      price: 300,
-      quantity: 1,
-      image:
-        "https://i.dailymail.co.uk/1s/2023/03/28/08/69193727-0-image-a-6_1679988992003.jpg",
-    },
-  ]);
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${BACKEND_URL}/userCart/`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setCartItems(res.data.products);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleIncrement = (id) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+    const currentQuantity = cartItems.find(
+      (item) => item.productId === id
+    ).quantity;
+
+    axios
+      .post(
+        `${BACKEND_URL}/updateCart/`,
+        {
+          productId: id,
+          quantity: currentQuantity + 1,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+          },
+        }
       )
-    );
+      .then((res) => {
+        setCartItems((prevItems) =>
+          prevItems.map((item) =>
+            item.productId === id
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          )
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleDecrement = (id) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
+    const currentQuantity = cartItems.find(
+      (item) => item.productId === id
+    ).quantity;
+
+    axios
+      .post(
+        `${BACKEND_URL}/updateCart/`,
+        {
+          productId: id,
+          quantity: currentQuantity - 1,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+          },
+        }
       )
-    );
+      .then((res) => {
+        setCartItems((prevItems) =>
+          prevItems.map((item) =>
+            item.productId === id
+              ? { ...item, quantity: item.quantity - 1 }
+              : item
+          )
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleRemove = (id) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    axios
+      .post(
+        `${BACKEND_URL}/removeFromCart/`,
+        {
+          productId: id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+          },
+        }
+      )
+      .then((res) => {
+        setCartItems((prevItems) =>
+          prevItems.filter((item) => item.productId !== id)
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  const list = cartItems.map((item) => (
-    <Row style={{ margin: "1rem auto" }}>
-      <Col>
-        <div
-          style={{
-            width: "15rem",
-            height: "10rem",
-            backgroundColor: "grey",
-            borderRadius: "25px",
-          }}
-          key={item.id}
-        >
-          <img
-            src={item.image}
-            alt=""
+  const list =
+    cartItems.length > 0 ? (
+      cartItems.map((item) => (
+        <Row style={{ margin: "1rem auto" }}>
+          <Col>
+            <div
+              style={{
+                width: "15rem",
+                height: "100%",
+                backgroundColor: "grey",
+                borderRadius: "25px",
+              }}
+              key={item.productId}
+            >
+              <img
+                src={item.poster_image_url}
+                alt=""
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "25px",
+                }}
+              />
+            </div>
+          </Col>
+          <Col
             style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              borderRadius: "25px",
+              display: "flex",
+              justifyContent: "center",
             }}
-          />
-        </div>
-      </Col>
-      <Col
-        style={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <Button
-          variant="dark"
-          style={{
-            width: "100%",
-            backgroundColor: "transparent",
-            border: "none",
-          }}
-          onClick={() => handleDecrement(item.id)}
-        >
-          <i class="fa-solid fa-minus "></i>
-        </Button>
+          >
+            <Button
+              variant="dark"
+              style={{
+                width: "100%",
+                backgroundColor: "transparent",
+                border: "none",
+              }}
+              onClick={() => handleDecrement(item.productId)}
+            >
+              <i class="fa-solid fa-minus "></i>
+            </Button>
 
-        <div style={{ margin: "5rem auto", fontSize: "1.5rem" }}>
-          {item.quantity}
-        </div>
+            <div style={{ margin: "6rem auto", fontSize: "1.5rem" }}>
+              {item.quantity}
+            </div>
 
-        <Button
-          variant="dark"
-          style={{
-            width: "100%",
-            backgroundColor: "transparent",
-            border: "none",
-          }}
-          onClick={() => handleIncrement(item.id)}
-        >
-          <i class="fa-solid fa-plus "></i>
-        </Button>
-        <Button
-          variant="dark"
-          style={{
-            width: "100%",
-            backgroundColor: "transparent",
-            border: "none",
-          }}
-          onClick={() => handleRemove(item.id)}
-        >
-          <i class="fa-solid fa-trash "></i>
-        </Button>
-      </Col>
-      {cartItems.indexOf(item) !== cartItems.length - 1 ? (
-        <hr
-          style={{
-            margin: "0.7rem auto",
-            width: "95%",
-            borderWidth: "0.3rem",
-          }}
-        />
-      ) : (
-        <></>
-      )}
-    </Row>
-  ));
+            <Button
+              variant="dark"
+              style={{
+                width: "100%",
+                backgroundColor: "transparent",
+                border: "none",
+              }}
+              onClick={() => handleIncrement(item.productId)}
+            >
+              <i class="fa-solid fa-plus "></i>
+            </Button>
+            <Button
+              variant="dark"
+              style={{
+                width: "100%",
+                backgroundColor: "transparent",
+                border: "none",
+              }}
+              onClick={() => handleRemove(item.productId)}
+            >
+              <i class="fa-solid fa-trash "></i>
+            </Button>
+          </Col>
+          {cartItems.indexOf(item) !== cartItems.length - 1 ? (
+            <hr
+              style={{
+                margin: "0.7rem auto",
+                width: "95%",
+                borderWidth: "0.3rem",
+              }}
+            />
+          ) : (
+            <></>
+          )}
+        </Row>
+      ))
+    ) : (
+      <div>Your cart is empty</div>
+    );
 
   return (
     <div
@@ -150,7 +213,7 @@ export default function Cart(props) {
         style={{
           width: "150%",
           height: "30rem",
-          backgroundColor: props.detailsCustom.detailsCustom.bgColor,
+          backgroundColor: "#3c4048",
           border: "1px solid white",
           color: "white",
           overflowY: "auto",
