@@ -40,7 +40,7 @@ export const Home = () => {
         <Navbar.Brand>
           <AcmeLogo />
           <Text b color="inherit" hideIn="xs">
-            Name
+          Nectars 2.0
           </Text>
         </Navbar.Brand>
         <Navbar.Content hideIn="xs" variant="underline">
@@ -87,7 +87,7 @@ export const Home = () => {
             width: "106px"}}
         multiText={[
           'The global commerce platform',
-          'The global commerce platform 2',
+          'A marketplace of goods and services',
           // 'Your The global commerce platform',
           // 'Not your basic global commerce',
           // 'We are THE global commerce ',
@@ -98,7 +98,7 @@ export const Home = () => {
         typeSpeed={30}
       />
         
-        <p className="p">Build your business with Shop-name to sell online, offline, and everywhere in between.</p>
+        <p className="p">Build your business with Nectars 2.0 to sell online, offline, and everywhere in between.</p>
         <p className="text-wrapper-2">
           Discover why millions of entrepreneurs chose our site to build their business interface .
         </p>
@@ -129,8 +129,8 @@ export const Home = () => {
         </div>
         
         <p className="text-wrapper-3">
-          Try Shop-name free for 30 days, no credit card required. By entering your email, you agree to the terms and
-          services of Shop-name.
+          Try Nectars 2.0 free for 30 days, no credit card required. By entering your email, you agree to the terms and
+          services of Nectars 2.0.
         </p>
         <p className="text-wrapper-4">Explore the our commerce community</p>
 
@@ -148,7 +148,7 @@ export const Home = () => {
           <Card.Divider />
           <Card.Body css={{ py: "$10" }}>
             <Text>
-            Offer your expertise to STORE-NAME merchants all over the world.
+            Offer your expertise to Nectars 2.0 merchants all over the world.
             </Text>
           </Card.Body>
           <Card.Divider />
@@ -172,7 +172,7 @@ export const Home = () => {
           <Card.Divider />
           <Card.Body css={{ py: "$10", margin: "0px  0px 0px 0px" }}>
             <Text>
-            Offer your design expertise to STORE-NAME designers all over the world.
+            Offer your design expertise to Nectars 2.0 designers all over the world.
             </Text>
           </Card.Body>
           <Card.Divider />
@@ -209,6 +209,10 @@ export const Home = () => {
         </div>
         </div> 
         <div className="your-store">Your store, your way</div>
+        <div className="last">
+         <div className="grow"> <h1 className="grow2">Grow your business with us.</h1></div>
+         <div className="tools"><h4>Whether you're looking to sell locally or internationally, we have the tools you need to succeed.</h4></div>
+          </div> 
       </div>
     </div>
   </div>
